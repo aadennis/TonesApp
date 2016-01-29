@@ -14,7 +14,7 @@ namespace Model.Test {
         public void PlayAllNotes() {
             var setOfTones = new ToneUtility(); ;
             foreach (var note in setOfTones.GetAllNotes()) {
-                setOfTones.PlayNote(note.Key, note.Value);
+                setOfTones.PlayNote(note);
             }
         }
     }

@@ -18,7 +18,10 @@ namespace Model.Test {
         public void RequestForFrequencyC3ReturnsExpectedElements() {
             TraceExecutingMethod();
             var toneSet = new ToneUtility();
-            Assert.AreEqual("C.3", toneSet.GetNoteElements(131));
+            Assert.AreEqual("C", toneSet.GetNoteElements(131).Note);
+            Assert.AreEqual(3, toneSet.GetNoteElements(131).Octave);
+
+
         }
 
         [TestMethod]

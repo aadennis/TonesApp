@@ -24,7 +24,7 @@ namespace ConsoleExecution {
             var toneUtility = new ToneUtility();
             var notes = toneUtility.GetAllNotes();
             foreach (var note in notes) {
-                toneUtility.PlayNote(note.Key, note.Value);
+                toneUtility.PlayNote(note);
             }
         }
     }
