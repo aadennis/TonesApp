@@ -2,7 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NotesApp;
 
-namespace Model.Tests {
+namespace Model.Test {
 
     [TestClass]
     public class NumberUtilityTests : ModelTestBase {

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.CompilerServices;
 
-namespace Model.Tests {
+namespace Model.Test {
 
     public class ModelTestBase {
 
