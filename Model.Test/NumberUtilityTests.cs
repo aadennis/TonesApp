@@ -9,7 +9,6 @@ namespace Model.Test {
 
         const int MaxIterationsToTestForError = 1000;
 
-        NumberUtilities util;
         Random rand;
 
         public NumberUtilityTests() {
@@ -21,7 +20,7 @@ namespace Model.Test {
             TraceExecutingMethod();
 
             for (int i = 0; i < MaxIterationsToTestForError; i++) {
-                var randomBoundaries = util.GetRandomInterval(1, 30, 7, rand);
+                var randomBoundaries = NumberUtilities.GetRandomInterval(1, 30, 7, rand);
                 Assert.AreNotEqual(randomBoundaries[0], randomBoundaries[1]);
             }
         }
@@ -32,7 +31,7 @@ namespace Model.Test {
 
             TraceExecutingMethod();
             for (int i = 0; i < MaxIterationsToTestForError; i++) {
-                var randomBoundaries = util.GetRandomInterval(1, 30, 7, rand);
+                var randomBoundaries = NumberUtilities.GetRandomInterval(1, 30, 7, rand);
                 //    System.Console.WriteLine(randomBoundaries[0]);
                 //    System.Console.WriteLine(randomBoundaries[1]);
                 //    System.Console.WriteLine("-----------------");
@@ -42,11 +41,11 @@ namespace Model.Test {
 
         [TestMethod]
         public void ReturnInputIfRequestedUpperAndLowerLimitsMatch() {
-            var upperLimit = 7;
+            const int upperLimit = 7;
             var lowerLimit = upperLimit;
 
             TraceExecutingMethod();
-            var randomBoundaries = util.GetRandomInterval(lowerLimit, upperLimit, 70000, rand);
+            var randomBoundaries = NumberUtilities.GetRandomInterval(lowerLimit, upperLimit, 70000, rand);
             Assert.AreEqual(randomBoundaries[0], randomBoundaries[1]);
         }
 
@@ -56,7 +55,6 @@ namespace Model.Test {
         }
 
         private void TestInitialize() {
-            util = new NumberUtilities();
             rand = new Random();
         }
     }

@@ -47,12 +47,16 @@ namespace NotesApp {
                     }
                     bWriter.Flush();
                     mStream.Seek(0, SeekOrigin.Begin);
-                    using (var ss = new SoundPlayer(mStream)) {
-                        ss.PlaySync();
-                    }
+                    PlaySound(mStream);
                 }
             }
 
+        }
+
+        private static void PlaySound(Stream mStream) {
+            using (var ss = new SoundPlayer(mStream)) {
+                ss.PlaySync();
+            }
         }
 
         public List<MusicalNote> GetAllNotes() {

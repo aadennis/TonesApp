@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace NotesApp {
 
-    public class NumberUtilities {
+    public static class NumberUtilities {
 
         /// <summary>
         ///  Return a pair of random integers, where the first is always lower than
@@ -12,17 +12,17 @@ namespace NotesApp {
         ///  where a large distance would not help with aural training.
         ///  It helps if the Random passed in has been used in previous calls, to help entropy.
         /// </summary>
-        public List<int> GetRandomInterval(int lowerLimit, int upperLimit, int maxDistance, Random rand) {
+        public static List<int> GetRandomInterval(int lowerLimit, int upperLimit, int maxDistance, Random rand) {
             if (lowerLimit.Equals(upperLimit)) {
                 return new List<int> { lowerLimit, upperLimit };
             }
 
-            const int MaxIterations = 100;
+            const int maxIterations = 100;
             var lowerAndUpperLimit = new List<int> { rand.Next(lowerLimit, upperLimit) };
             var nextNote = rand.Next(lowerLimit, upperLimit);
             var count = 0;
             while (lowerAndUpperLimit[0] == nextNote || System.Math.Abs(lowerAndUpperLimit[0] - nextNote) > maxDistance) {
-                if (count++ > MaxIterations) {
+                if (count++ > maxIterations) {
                     throw new Exception("Too many iterations");
                 }
                 nextNote = rand.Next(lowerLimit, upperLimit);

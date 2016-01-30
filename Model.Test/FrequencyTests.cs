@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Runtime.InteropServices;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NotesApp;
 
@@ -6,6 +7,9 @@ namespace Model.Test {
 
     [TestClass]
     public class FrequencyTests : ModelTestBase {
+
+        private const int TestFrequency = 147;
+        private const int KnownIndexForFrequency = 2;
 
         [TestMethod]
         public void FrequencyDictionaryHas2OctavesOfNotes() {
@@ -18,9 +22,16 @@ namespace Model.Test {
         public void RequestForFrequencyC3ReturnsExpectedElements() {
             TraceExecutingMethod();
             var toneSet = new ToneUtility();
-            Assert.AreEqual("C", toneSet.GetNoteElements(131).Note);
-            Assert.AreEqual(3, toneSet.GetNoteElements(131).Octave);
+            Assert.AreEqual("C", toneSet.GetNoteElements(TestFrequency).Note);
+            Assert.AreEqual(3, toneSet.GetNoteElements(TestFrequency).Octave);
+        }
 
+        [TestMethod]
+        public void FrequencyCanBeGotViaIndex() {
+            TraceExecutingMethod();
+            var notes = new MusicalNotes();
+            var frequency = notes.GetNoteFromIndex(KnownIndexForFrequency).Frequency;
+            Assert.AreEqual(TestFrequency, frequency);
 
         }
 

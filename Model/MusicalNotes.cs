@@ -42,6 +42,10 @@ namespace NotesApp {
         public MusicalNote GetNote(int frequency) {
             return _notes.Single(note => note.Frequency.Equals(frequency));
         }
+
+        public MusicalNote GetNoteFromIndex(int index) {
+            return _notes[index];
+        }
     }
 
 
