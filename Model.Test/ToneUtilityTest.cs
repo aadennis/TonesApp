@@ -11,8 +11,9 @@ namespace Model.Test {
     [TestClass]
     public class ToneUtilityTest {
 
-        private Random _random = new Random();
-        /// <summary>Test stub for PlayNote(Int32, String)</summary>
+        private readonly Random _random = new Random();
+
+
         [TestMethod]
         public void PlayAllNotes() {
             var setOfTones = new ToneUtility(); ;
@@ -22,7 +23,7 @@ namespace Model.Test {
         }
 
         [TestMethod]
-        public void PlayNote() {
+        public void PlayInterval() {
             var notes = new MusicalNotes();
             var interval = NumberUtilities.GetRandomInterval(1, 24, 12, _random);
             var setOfTones = new ToneUtility();

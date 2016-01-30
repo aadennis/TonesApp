@@ -22,7 +22,7 @@ namespace Model.Test {
         public void RequestForFrequencyC3ReturnsExpectedElements() {
             TraceExecutingMethod();
             var toneSet = new ToneUtility();
-            Assert.AreEqual("C", toneSet.GetNoteElements(TestFrequency).Note);
+            Assert.AreEqual("D", toneSet.GetNoteElements(TestFrequency).Note);
             Assert.AreEqual(3, toneSet.GetNoteElements(TestFrequency).Octave);
         }
 

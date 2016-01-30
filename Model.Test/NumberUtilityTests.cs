@@ -19,7 +19,7 @@ namespace Model.Test {
         public void UpperAndLowerNumbersAreNeverTheSame() {
             TraceExecutingMethod();
 
-            for (int i = 0; i < MaxIterationsToTestForError; i++) {
+            for (var i = 0; i < MaxIterationsToTestForError; i++) {
                 var randomBoundaries = NumberUtilities.GetRandomInterval(1, 30, 7, rand);
                 Assert.AreNotEqual(randomBoundaries[0], randomBoundaries[1]);
             }
@@ -30,11 +30,8 @@ namespace Model.Test {
             const int maxDistance = 7;
 
             TraceExecutingMethod();
-            for (int i = 0; i < MaxIterationsToTestForError; i++) {
+            for (var i = 0; i < MaxIterationsToTestForError; i++) {
                 var randomBoundaries = NumberUtilities.GetRandomInterval(1, 30, 7, rand);
-                //    System.Console.WriteLine(randomBoundaries[0]);
-                //    System.Console.WriteLine(randomBoundaries[1]);
-                //    System.Console.WriteLine("-----------------");
                 Assert.IsTrue(maxDistance >= (randomBoundaries[1] - randomBoundaries[0]));
             }
         }
@@ -42,16 +39,11 @@ namespace Model.Test {
         [TestMethod]
         public void ReturnInputIfRequestedUpperAndLowerLimitsMatch() {
             const int upperLimit = 7;
-            var lowerLimit = upperLimit;
+            const int lowerLimit = upperLimit;
 
             TraceExecutingMethod();
             var randomBoundaries = NumberUtilities.GetRandomInterval(lowerLimit, upperLimit, 70000, rand);
             Assert.AreEqual(randomBoundaries[0], randomBoundaries[1]);
-        }
-
-        [TestMethod]
-        public void FrequencyC3ReturnsExpectedElements() {
-
         }
 
         private void TestInitialize() {
@@ -59,13 +51,3 @@ namespace Model.Test {
         }
     }
 }
-
-// Example execution:
-//     PS C:\temp\ps\Tones\Tones> dnx -p .\Model.Tests\project.json test
-// xUnit.net DNX Runner (64-bit DNXCore 5.0)
-//   Discovering: Model.Tests
-//   Discovered:  Model.Tests
-//   Starting:    Model.Tests
-//   Finished:    Model.Tests
-// === TEST EXECUTION SUMMARY ===
-//    Model.Tests  Total: 3, Errors: 0, Failed: 0, Skipped: 0, Time: 0.164s
