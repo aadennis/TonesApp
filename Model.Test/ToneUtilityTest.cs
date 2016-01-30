@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NotesApp;
+using System.Speech.Synthesis;
 
 namespace Model.Test {
 
@@ -12,6 +13,10 @@ namespace Model.Test {
     public class ToneUtilityTest {
 
         private readonly Random _random = new Random();
+        private SpeechSynthesizer synth = new SpeechSynthesizer();
+        public ToneUtilityTest() {
+            
+        }
 
 
         [TestMethod]
@@ -23,16 +28,34 @@ namespace Model.Test {
         }
 
         [TestMethod]
-        public void PlayInterval() {
-            var notes = new MusicalNotes();
-            var interval = NumberUtilities.GetRandomInterval(1, 24, 12, _random);
+        public void PlayIntervals() {
+
+            const int totalIterations = 5;
+            const int delayInSecondsBetweenAudioSnippets = 3;
+            var notes = new MusicalNotes();   
             var setOfTones = new ToneUtility();
-            setOfTones.PlayNote(notes.GetNoteFromIndex(interval[0]));
-            setOfTones.PlayNote(notes.GetNoteFromIndex(interval[1]));
-            Console.WriteLine(interval[0]);
-            Console.WriteLine(interval[1]);
-            var distance = interval[1] - interval[0];
-            Console.WriteLine(distance);
+
+            for (var i = 0; i < totalIterations; i++) {
+                var intervalBoundaries = NumberUtilities.GetRandomInterval(1, 24, 12, _random);
+                setOfTones.PlayNote(notes.GetNoteFromIndex(intervalBoundaries[0]));
+                setOfTones.PlayNote(notes.GetNoteFromIndex(intervalBoundaries[1]));
+                Console.WriteLine(intervalBoundaries[0]);
+                Console.WriteLine(intervalBoundaries[1]);
+                var semitoneCount = intervalBoundaries[1] - intervalBoundaries[0];
+                var spokenInterval = Intervals.GetInterval(semitoneCount);
+                System.Threading.Thread.Sleep(delayInSecondsBetweenAudioSnippets * 1000);
+                synth.Speak(spokenInterval);
+                Console.WriteLine(spokenInterval);
+                System.Threading.Thread.Sleep(delayInSecondsBetweenAudioSnippets * 1000);
+            }
+
+        }
+
+        [TestMethod]
+        public void PlayAPerfectFourthInterval() {
+            var interval = Intervals.GetInterval(5);
+            Console.WriteLine(interval);
+            synth.Speak(interval);
 
         }
     }
