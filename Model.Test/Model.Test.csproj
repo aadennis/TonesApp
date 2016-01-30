@@ -56,7 +56,6 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="CodedUITest1.cs" />
     <Compile Include="ModelTestBase.cs" />
     <Compile Include="FrequencyTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
