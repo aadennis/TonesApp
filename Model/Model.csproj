@@ -42,6 +42,8 @@
   <ItemGroup>
     <Compile Include="MusicalNote.cs" />
     <Compile Include="MusicalNotes.cs" />
+    <Compile Include="NoteDescription.cs" />
+    <Compile Include="NoteDescriptions.cs" />
     <Compile Include="NumberUtilities.cs" />
     <Compile Include="ToneUtility.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
