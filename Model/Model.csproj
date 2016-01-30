@@ -40,6 +40,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Interval.cs" />
+    <Compile Include="Intervals.cs" />
     <Compile Include="MusicalNote.cs" />
     <Compile Include="MusicalNotes.cs" />
     <Compile Include="NoteDescription.cs" />

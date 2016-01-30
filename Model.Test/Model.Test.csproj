@@ -62,6 +62,7 @@
     <Compile Include="NumberUtilityTests.cs" />
     <Compile Include="ToneUtilityTest.cs" />
     <Compile Include="SpokenNoteTests.cs" />
+    <Compile Include="IntervalTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Model\Model.csproj">
