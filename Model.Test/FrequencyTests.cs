@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Runtime.InteropServices;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NotesApp;
 
@@ -36,13 +35,22 @@ namespace Model.Test {
         }
 
         [TestMethod]
+        public void EachFrequencyInTheCollectionsNaturalOrderIsHigherThanThePrevious() {
+            var notes = new MusicalNotes();
+            var previousFrequency = 0;
+            foreach (var frequency in notes.GetAllFrequencies()) {
+                Console.WriteLine(frequency);
+                Assert.IsTrue(frequency > previousFrequency, 
+                    $"The current frequency {frequency} is not higher than the previous frequency {previousFrequency}");
+                previousFrequency = frequency;
+            }
+        }
+
+        [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
         public void RequestForNotFoundFrequencyThrowsException() {
-
-
             TraceExecutingMethod();
             var toneSet = new ToneUtility();
-
             try {
                 toneSet.GetNoteElements(9999);
             }
@@ -50,7 +58,6 @@ namespace Model.Test {
                 Assert.AreEqual("[The frequency [9999] was not found in the set of available notes]", ex.Message);
                 throw;
             }
-
         }
     }
 }
