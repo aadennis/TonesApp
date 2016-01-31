@@ -8,7 +8,6 @@ namespace NotesApp {
 
     public class ToneUtility {
 
-        
        
         private readonly double _amplitude = Math.Pow(2, 15) - 1;
         private const int Duration = 1000;

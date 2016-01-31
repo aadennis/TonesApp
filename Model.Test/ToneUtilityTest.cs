@@ -2,6 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NotesApp;
 using System.Speech.Synthesis;
+using System.Threading;
 
 namespace Model.Test {
 
@@ -13,11 +14,7 @@ namespace Model.Test {
     public class ToneUtilityTest {
 
         private readonly Random _random = new Random();
-        private SpeechSynthesizer synth = new SpeechSynthesizer();
-        public ToneUtilityTest() {
-            
-        }
-
+        private readonly SpeechSynthesizer _synth = new SpeechSynthesizer();
 
         [TestMethod]
         public void PlayAllNotes() {
@@ -28,7 +25,7 @@ namespace Model.Test {
         }
 
         [TestMethod]
-        public void PlayIntervals() {
+        public void PlayIntervalsAndConfirmTheirName() {
 
             const int totalIterations = 5;
             const int delayInSecondsBetweenAudioSnippets = 3;
@@ -43,10 +40,10 @@ namespace Model.Test {
                 Console.WriteLine(intervalBoundaries[1]);
                 var semitoneCount = intervalBoundaries[1] - intervalBoundaries[0];
                 var spokenInterval = Intervals.GetInterval(semitoneCount);
-                System.Threading.Thread.Sleep(delayInSecondsBetweenAudioSnippets * 1000);
-                synth.Speak(spokenInterval);
+                Thread.Sleep(delayInSecondsBetweenAudioSnippets * 1000);
+                _synth.Speak(spokenInterval);
                 Console.WriteLine(spokenInterval);
-                System.Threading.Thread.Sleep(delayInSecondsBetweenAudioSnippets * 1000);
+                Thread.Sleep(delayInSecondsBetweenAudioSnippets * 1000);
             }
 
         }
@@ -55,8 +52,7 @@ namespace Model.Test {
         public void PlayAPerfectFourthInterval() {
             var interval = Intervals.GetInterval(5);
             Console.WriteLine(interval);
-            synth.Speak(interval);
-
+            _synth.Speak(interval);
         }
     }
 
