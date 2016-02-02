@@ -27,22 +27,24 @@ namespace Model.Test {
         [TestMethod]
         public void PlayIntervalsAndConfirmTheirName() {
 
-            const int totalIterations = 5;
-            const int delayInSecondsBetweenAudioSnippets = 3;
+            const int totalIterations = 1000;
+            const int delayInSecondsBetweenAudioSnippets = 5;
             var notes = new MusicalNotes();   
             var setOfTones = new ToneUtility();
 
             for (var i = 0; i < totalIterations; i++) {
-                var intervalBoundaries = NumberUtilities.GetRandomInterval(1, 24, 12, _random);
+                var intervalBoundaries = NumberUtilities.GetRandomInterval(0, 24, 12, _random);
                 setOfTones.PlayNote(notes.GetNoteFromIndex(intervalBoundaries[0]));
                 setOfTones.PlayNote(notes.GetNoteFromIndex(intervalBoundaries[1]));
-                Console.WriteLine(intervalBoundaries[0]);
-                Console.WriteLine(intervalBoundaries[1]);
+                Thread.Sleep(delayInSecondsBetweenAudioSnippets * 1000);
+                setOfTones.PlayNote(notes.GetNoteFromIndex(intervalBoundaries[0]));
+                setOfTones.PlayNote(notes.GetNoteFromIndex(intervalBoundaries[1]));
+                Thread.Sleep(delayInSecondsBetweenAudioSnippets * 1000);
+
                 var semitoneCount = intervalBoundaries[1] - intervalBoundaries[0];
                 var spokenInterval = Intervals.GetInterval(semitoneCount);
-                Thread.Sleep(delayInSecondsBetweenAudioSnippets * 1000);
+                
                 _synth.Speak(spokenInterval);
-                Console.WriteLine(spokenInterval);
                 Thread.Sleep(delayInSecondsBetweenAudioSnippets * 1000);
             }
 
