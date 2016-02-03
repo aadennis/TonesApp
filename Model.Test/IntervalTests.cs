@@ -1,11 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NotesApp;
+using System;
+using System.Collections.Generic;
 
 namespace Model.Test {
     [TestClass]
-    public class IntervalTests {
+    public class IntervalTests : ModelTestBase {
+
+        private const int LowerLimit = 1;
+        private const int UpperLimit = 30;
+        private const int MaxDistance = 13;
+        private const int MaxIterationsToTestForError = 10000;
+
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
         public void RequestedIntervalOutsideTheKnownRangeThrowsException() {
@@ -21,14 +27,51 @@ namespace Model.Test {
 
         [TestMethod]
         public void ValidSemitoneCountReturnsExpectedIntervalDescription() {
-            const int interval = 5;
+            var interval = 5;
             var description = Intervals.GetInterval(interval);
             Assert.AreEqual("Perfect fourth", description);
+
+            interval = 0;
+            description = Intervals.GetInterval(interval);
+            Assert.AreEqual("Unison", description);
         }
 
         [TestMethod]
         public void CountOfAllIntervalsIsCorrect() {
             Assert.AreEqual(13, Intervals.GetAllIntervals().Count);
         }
+
+        [TestMethod, Ignore]
+        public void WithinALargeNumberOfIterationsEachDescriptionInTheRangeAppearsAMinimumNumberOfTimes() {
+            var tallyOfFoundNumbers = new SortedDictionary<object, int>();
+
+            const int minimumCountForANumberInTheRange = 50;
+            for (var i = LowerLimit; i <= UpperLimit; i++) {
+                tallyOfFoundNumbers.Add(i.ToString(), 0);
+            }
+
+            ShowDictionary(LowerLimit, tallyOfFoundNumbers, "Initializing");
+
+            TraceExecutingMethod();
+            for (var i = 0; i < MaxIterationsToTestForError; i++) {
+                var randomBoundaries = NumberUtilities.GetRandomInterval(LowerLimit, UpperLimit, MaxDistance, Rand);
+
+                for (var x = randomBoundaries[0]; x <= randomBoundaries[1]; x++) {
+                    tallyOfFoundNumbers[x]++;
+                }
+            }
+
+            ShowDictionary(LowerLimit, tallyOfFoundNumbers, "Post population");
+
+
+            foreach (var number in tallyOfFoundNumbers) {
+                if (number.Value < minimumCountForANumberInTheRange) {
+                    throw new Exception($"expected a count of at least [{minimumCountForANumberInTheRange}] for [{number}] but got only [{number.Value}]");
+                }
+
+            }
+        }
+
+
     }
 }

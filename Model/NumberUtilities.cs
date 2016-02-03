@@ -7,8 +7,8 @@ namespace NotesApp {
 
         /// <summary>
         ///  Return a pair of random integers, where the first is always lower than
-        ///  the second, and there is not more than maxDistance between the returned integers. 
-        ///  Keeping this interval close is because the main usecase is a musical interval test
+        ///  the second (or can be equal to the second, for unison), and there is not more than maxDistance 
+        /// between the returned integers.   Keeping this interval close is because the main usecase is a musical interval test
         ///  where a large distance would not help with aural training.
         ///  It helps if the Random passed in has been used in previous calls, to help entropy.
         ///  Note that Random.Next returns an integer that is LESS than the upper limit argument,

@@ -4,16 +4,15 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NotesApp;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 
 namespace Model.Test {
 
     [TestClass]
     public class NumberUtilityTests : ModelTestBase {
-
-        const int MaxIterationsToTestForError = 10000;
-
-        private Random _rand;
+        private const int LowerLimit = 1;
+        private const int UpperLimit = 30;
+        private const int MaxDistance = 13;
+        private const int MaxIterationsToTestForError = 10000;
 
         public NumberUtilityTests() {
             TestInitialize();
@@ -25,7 +24,7 @@ namespace Model.Test {
             TraceExecutingMethod();
 
             for (var i = 0; i < MaxIterationsToTestForError; i++) {
-                var randomBoundaries = NumberUtilities.GetRandomInterval(1, 30, 7, _rand);
+                var randomBoundaries = NumberUtilities.GetRandomInterval(1, 30, 7, Rand);
                 Assert.AreNotEqual(randomBoundaries[0], randomBoundaries[1]);
             }
         }
@@ -36,7 +35,7 @@ namespace Model.Test {
 
             TraceExecutingMethod();
             for (var i = 0; i < MaxIterationsToTestForError; i++) {
-                var randomBoundaries = NumberUtilities.GetRandomInterval(1, 30, 7, _rand);
+                var randomBoundaries = NumberUtilities.GetRandomInterval(1, 30, 7, Rand);
                 Assert.IsTrue(maxDistance >= (randomBoundaries[1] - randomBoundaries[0]));
             }
         }
@@ -47,35 +46,31 @@ namespace Model.Test {
             const int lowerLimit = upperLimit;
 
             TraceExecutingMethod();
-            var randomBoundaries = NumberUtilities.GetRandomInterval(lowerLimit, upperLimit, 70000, _rand);
+            var randomBoundaries = NumberUtilities.GetRandomInterval(lowerLimit, upperLimit, 70000, Rand);
             Assert.AreEqual(randomBoundaries[0], randomBoundaries[1]);
         }
 
         [TestMethod]
         public void WithinALargeNumberOfIterationsEachNumberInTheRangeAppearsAMinimumNumberOfTimes() {
-            var tallyOfFoundNumbers = new SortedDictionary<int, int>();
+            var tallyOfFoundNumbers = new SortedDictionary<object, int>();
 
-
-            const int lowerLimit = 1;
-            const int upperLimit = 30;
-            const int maxDistance = 13;
             const int minimumCountForANumberInTheRange = 50;
-            for (var i = lowerLimit; i <= upperLimit; i++) {
+            for (var i = LowerLimit; i <= UpperLimit; i++) {
                 tallyOfFoundNumbers.Add(i, 0);
             }
 
-            ShowDictionary(lowerLimit, tallyOfFoundNumbers, "Initializing");
+            ShowDictionary(LowerLimit, tallyOfFoundNumbers, "Initializing");
 
             TraceExecutingMethod();
             for (var i = 0; i < MaxIterationsToTestForError; i++) {
-                var randomBoundaries = NumberUtilities.GetRandomInterval(lowerLimit, upperLimit, maxDistance, _rand);
+                var randomBoundaries = NumberUtilities.GetRandomInterval(LowerLimit, UpperLimit, MaxDistance, Rand);
 
                 for (var x = randomBoundaries[0]; x <= randomBoundaries[1]; x++) {
                     tallyOfFoundNumbers[x]++;
                 }
             }
 
-            ShowDictionary(lowerLimit, tallyOfFoundNumbers, "Post population");
+            ShowDictionary(LowerLimit, tallyOfFoundNumbers, "Post population");
 
 
             foreach (var number in tallyOfFoundNumbers) {
@@ -84,18 +79,6 @@ namespace Model.Test {
                 }
 
             }
-        }
-
-        private static void ShowDictionary(int lowerLimit, SortedDictionary<int, int> tallyOfFoundNumbers, string prefixMessage) {
-            for (var i = lowerLimit; i <= tallyOfFoundNumbers.Count; i++) {
-                Debug.WriteLine($"[{i}]{prefixMessage}: {tallyOfFoundNumbers[i]}");
-            }
-        }
-
-        private void TestInitialize() {
-            Debug.Listeners.Add(new TextWriterTraceListener(Console.Out));
-            Debug.AutoFlush = true;
-            _rand = new Random();
         }
     }
 }
