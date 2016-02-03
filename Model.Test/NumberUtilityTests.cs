@@ -1,7 +1,10 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿#define DEBUG
+
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NotesApp;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace Model.Test {
 
@@ -49,33 +52,49 @@ namespace Model.Test {
         }
 
         [TestMethod]
-        public void WithinALargeNumberOfIterationsEachNumberInTheRangeAppearsAtLeastOnce() {
-            var tallyOfFoundNumbers = new Dictionary<int, int>();
+        public void WithinALargeNumberOfIterationsEachNumberInTheRangeAppearsAMinimumNumberOfTimes() {
+            var tallyOfFoundNumbers = new SortedDictionary<int, int>();
+
+
             const int lowerLimit = 1;
             const int upperLimit = 30;
             const int maxDistance = 13;
+            const int minimumCountForANumberInTheRange = 50;
             for (var i = lowerLimit; i <= upperLimit; i++) {
                 tallyOfFoundNumbers.Add(i, 0);
             }
 
+            ShowDictionary(lowerLimit, tallyOfFoundNumbers, "Initializing");
+
             TraceExecutingMethod();
             for (var i = 0; i < MaxIterationsToTestForError; i++) {
                 var randomBoundaries = NumberUtilities.GetRandomInterval(lowerLimit, upperLimit, maxDistance, _rand);
+
                 for (var x = randomBoundaries[0]; x <= randomBoundaries[1]; x++) {
-                    tallyOfFoundNumbers[x] = x;
+                    tallyOfFoundNumbers[x]++;
                 }
             }
 
-            foreach (var number in tallyOfFoundNumbers.Keys) {
-                if (tallyOfFoundNumbers[number] != number) {
-                    throw new Exception($"expected an index for {number}");
+            ShowDictionary(lowerLimit, tallyOfFoundNumbers, "Post population");
+
+
+            foreach (var number in tallyOfFoundNumbers) {
+                if (number.Value < minimumCountForANumberInTheRange) {
+                    throw new Exception($"expected a count of at least [{minimumCountForANumberInTheRange}] for [{number}] but got only [{number.Value}]");
                 }
+
             }
+        }
 
-
+        private static void ShowDictionary(int lowerLimit, SortedDictionary<int, int> tallyOfFoundNumbers, string prefixMessage) {
+            for (var i = lowerLimit; i <= tallyOfFoundNumbers.Count; i++) {
+                Debug.WriteLine($"[{i}]{prefixMessage}: {tallyOfFoundNumbers[i]}");
+            }
         }
 
         private void TestInitialize() {
+            Debug.Listeners.Add(new TextWriterTraceListener(Console.Out));
+            Debug.AutoFlush = true;
             _rand = new Random();
         }
     }

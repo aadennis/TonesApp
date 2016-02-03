@@ -1,4 +1,7 @@
-﻿using NotesApp;
+﻿using System;
+using System.Threading;
+using NotesApp;
+using System.Speech.Synthesis;
 
 namespace ConsoleExecution {
 
@@ -20,11 +23,40 @@ namespace ConsoleExecution {
 
     public class ToneGenerator {
 
+        private readonly Random _random = new Random();
+        private readonly SpeechSynthesizer _synth = new SpeechSynthesizer();
+
         public void PlayAllNotes() {
-            var toneUtility = new ToneUtility();
-            var notes = toneUtility.GetAllNotes();
-            foreach (var note in notes) {
-                toneUtility.PlayNote(note);
+            
+            const int totalIterations = 1000;
+            const int delayInSecondsBetweenAudioSnippets = 5;
+            var notes = new MusicalNotes();
+            var setOfTones = new ToneUtility();
+            var _random = new Random();
+
+            var frequencies = notes.GetAllFrequencies();
+
+            for (var i = 0; i < totalIterations; i++) {
+                var intervalBoundaries = NumberUtilities.GetRandomInterval(0, 24, 12, _random);
+                var frequency0 = frequencies[intervalBoundaries[0]];
+                var frequency1 = frequencies[intervalBoundaries[1]];
+
+                setOfTones.PlayNote(notes.GetNoteFromIndex(intervalBoundaries[0]));
+                setOfTones.PlayNote(notes.GetNoteFromIndex(intervalBoundaries[1]));
+                Console.WriteLine(frequency0);
+                Console.WriteLine(frequency1);
+                Console.WriteLine(frequency1 - frequency0);
+
+                Thread.Sleep(delayInSecondsBetweenAudioSnippets * 1000);
+                setOfTones.PlayNote(notes.GetNoteFromIndex(intervalBoundaries[0]));
+                setOfTones.PlayNote(notes.GetNoteFromIndex(intervalBoundaries[1]));
+                Thread.Sleep(delayInSecondsBetweenAudioSnippets * 1000);
+
+                var semitoneCount = intervalBoundaries[1] - intervalBoundaries[0];
+                var spokenInterval = Intervals.GetInterval(semitoneCount);
+
+                _synth.Speak(spokenInterval);
+                Thread.Sleep(delayInSecondsBetweenAudioSnippets * 1000);
             }
         }
     }
