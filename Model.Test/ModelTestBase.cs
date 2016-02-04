@@ -7,6 +7,10 @@ namespace Model.Test {
 
     public class ModelTestBase {
 
+        public ModelTestBase() {
+            TestInitialize();
+        }
+
         //available from .Net 4.5...
         protected void TraceExecutingMethod([CallerMemberName] string caller = null) {
             Console.ForegroundColor = ConsoleColor.Yellow;

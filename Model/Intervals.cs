@@ -10,9 +10,9 @@ namespace NotesApp {
             new Interval {SemiToneCount = 1, Description = "Minor second"},
             new Interval {SemiToneCount = 2, Description = "Major second"},
             new Interval {SemiToneCount = 3, Description = "Minor third"},
-            new Interval {SemiToneCount = 4, Description = "Minor third"},
+            new Interval {SemiToneCount = 4, Description = "Major third"},
             new Interval {SemiToneCount = 5, Description = "Perfect fourth"},
-            new Interval {SemiToneCount = 6, Description = "Tritone"},
+            new Interval {SemiToneCount = 6, Description = "Augmented fourth"},
             new Interval {SemiToneCount = 7, Description = "Perfect fifth"},
             new Interval {SemiToneCount = 8, Description = "Minor sixth"},
             new Interval {SemiToneCount = 9, Description = "Major sixth"},
@@ -21,6 +21,10 @@ namespace NotesApp {
             new Interval {SemiToneCount = 12, Description = "Perfect octave"}
         };
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public static List<Interval> GetAllIntervals() {
             return IntervalSet;
         }

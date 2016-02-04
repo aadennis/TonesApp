@@ -2,6 +2,7 @@
 using NotesApp;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace Model.Test {
     [TestClass]
@@ -72,6 +73,43 @@ namespace Model.Test {
             }
         }
 
+        [TestMethod]
+        public void WithinALargeNumberOfIterationsEachDescriptionInTheRangeAppearsAMinimumNumberOfTimesx() {
+            var dictionaryOfSemiToneCounts = new SortedDictionary<int, int>();
 
+            TraceExecutingMethod();
+            for (var i = 0; i < MaxIterationsToTestForError; i++) {
+                var randomBoundaries = NumberUtilities.GetRandomInterval(LowerLimit, UpperLimit, MaxDistance, Rand);
+                var semitoneDistance = randomBoundaries[1] - randomBoundaries[0];
+                if (!dictionaryOfSemiToneCounts.ContainsKey(semitoneDistance)) {
+                    dictionaryOfSemiToneCounts.Add(semitoneDistance, 0);
+                }
+                dictionaryOfSemiToneCounts[semitoneDistance]++;
+
+            }
+
+            for (var i = 0; i <= Intervals.GetAllIntervals().Count; i++) {
+                Assert.IsTrue(dictionaryOfSemiToneCounts.ContainsKey(i), $"could not find key for {i}");
+                Debug.WriteLine($"{i}: count: {dictionaryOfSemiToneCounts[i]}");
+            }
+
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void GetRandomIntervalPassingInNullRandomThrowsException() {
+            Random rand = null;
+            string errorMessage = string.Empty;
+            try {
+                // ReSharper disable once ExpressionIsAlwaysNull
+                NumberUtilities.GetRandomInterval(LowerLimit, UpperLimit, MaxDistance, rand);
+            }
+            catch (ArgumentNullException e) {
+                Assert.AreEqual("Value cannot be null.\r\nParameter name: rand", e.Message);
+                throw;
+            }
+           
+
+        }
     }
 }

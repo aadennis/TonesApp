@@ -17,6 +17,9 @@ namespace NotesApp {
         /// 
         /// </summary>
         public static List<int> GetRandomInterval(int lowerLimit, int upperLimit, int maxDistance, Random rand) {
+            if (rand == null) {
+                throw new ArgumentNullException(nameof(rand));
+            }
             if (lowerLimit.Equals(upperLimit)) {
                 return new List<int> { lowerLimit, upperLimit };
             }
@@ -25,7 +28,7 @@ namespace NotesApp {
             var lowerAndUpperLimit = new List<int> { rand.Next(lowerLimit, upperLimit) };
             var nextNote = rand.Next(lowerLimit, upperLimit);
             var count = 0;
-            while (lowerAndUpperLimit[0] == nextNote || Math.Abs(lowerAndUpperLimit[0] - nextNote) > maxDistance) {
+            while (Math.Abs(lowerAndUpperLimit[0] - nextNote) > maxDistance) {
                 if (count++ > maxIterations) {
                     throw new Exception("Too many iterations");
                 }

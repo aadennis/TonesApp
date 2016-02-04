@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NotesApp;
 using System.Speech.Synthesis;
@@ -7,7 +8,7 @@ using System.Threading;
 namespace Model.Test {
 
     /// <summary>
-    /// Integration tests... which use your ears. So a bit hard to automate.
+    /// Integration tests... which use your ears to determine whether something is right. So a bit hard to automate.
     /// But I should make a better attempt at Separation of Concerns on this.
     /// </summary>
     [TestClass]
@@ -51,10 +52,14 @@ namespace Model.Test {
         }
 
         [TestMethod]
-        public void PlayAPerfectFourthInterval() {
-            var interval = Intervals.GetInterval(5);
-            Console.WriteLine(interval);
-            _synth.Speak(interval);
+        public void SpeakAllTheIntervals() {
+            var intervals = Intervals.GetAllIntervals();
+            foreach (var interval in intervals) {
+                string wordsToSpeak = $"SemitoneCount: {interval.SemiToneCount};{interval.Description}";
+                Debug.WriteLine(wordsToSpeak);
+                _synth.Speak(wordsToSpeak);
+            }
+
         }
     }
 

@@ -4,6 +4,7 @@ using System.Linq;
 namespace NotesApp {
 
     public class MusicalNotes {
+        //http://www.phy.mtu.edu/~suits/notefreqs.html
         private readonly List<MusicalNote> _notes = new List<MusicalNote> {
             new MusicalNote {Frequency = 131, Note = "C", Octave = 3},
             new MusicalNote {Frequency = 139, Note = "C#", Octave = 3},
