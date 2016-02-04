@@ -74,7 +74,7 @@ namespace Model.Test {
         }
 
         [TestMethod]
-        public void WithinALargeNumberOfIterationsEachDescriptionInTheRangeAppearsAMinimumNumberOfTimesx() {
+        public void WithinALargeNumberOfIterationsAllTheIntervalsAppearAtLeastOnce() {
             var dictionaryOfSemiToneCounts = new SortedDictionary<int, int>();
 
             TraceExecutingMethod();
@@ -97,9 +97,8 @@ namespace Model.Test {
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
-        public void GetRandomIntervalPassingInNullRandomThrowsException() {
+        public void PassingInNullRandomToGetRandomIntervalThrowsException() {
             Random rand = null;
-            string errorMessage = string.Empty;
             try {
                 // ReSharper disable once ExpressionIsAlwaysNull
                 NumberUtilities.GetRandomInterval(LowerLimit, UpperLimit, MaxDistance, rand);
@@ -108,8 +107,6 @@ namespace Model.Test {
                 Assert.AreEqual("Value cannot be null.\r\nParameter name: rand", e.Message);
                 throw;
             }
-           
-
         }
     }
 }
