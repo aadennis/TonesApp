@@ -14,7 +14,7 @@ namespace Model.Test {
         private const int MaxIterationsToTestForError = 10000;
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
+        [ExpectedException(typeof(ArgumentException))] 
         public void RequestedIntervalOutsideTheKnownRangeThrowsException() {
             const int badInterval = -1;
             try {
@@ -42,13 +42,13 @@ namespace Model.Test {
             Assert.AreEqual(13, Intervals.GetAllIntervals().Count);
         }
 
-        [TestMethod, Ignore]
+        [TestMethod]
         public void WithinALargeNumberOfIterationsEachDescriptionInTheRangeAppearsAMinimumNumberOfTimes() {
-            var tallyOfFoundNumbers = new SortedDictionary<object, int>();
-
             const int minimumCountForANumberInTheRange = 50;
+
+            var tallyOfFoundNumbers = new SortedDictionary<int, int>();
             for (var i = LowerLimit; i <= UpperLimit; i++) {
-                tallyOfFoundNumbers.Add(i.ToString(), 0);
+                tallyOfFoundNumbers.Add(i, 0);
             }
 
             ShowDictionary(LowerLimit, tallyOfFoundNumbers, "Initializing");
@@ -69,7 +69,6 @@ namespace Model.Test {
                 if (number.Value < minimumCountForANumberInTheRange) {
                     throw new Exception($"expected a count of at least [{minimumCountForANumberInTheRange}] for [{number}] but got only [{number.Value}]");
                 }
-
             }
         }
 

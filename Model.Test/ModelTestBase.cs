@@ -17,7 +17,7 @@ namespace Model.Test {
             Console.WriteLine("[{0:H:mm:ss.fff}]: Executing test [{1}]", DateTime.UtcNow, caller);
         }
 
-        protected static void ShowDictionary(int lowerLimit, SortedDictionary<object, int> tallyOfFoundNumbers, string prefixMessage) {
+        protected static void ShowDictionary(int lowerLimit, SortedDictionary<int, int> tallyOfFoundNumbers, string prefixMessage) {
             for (var i = lowerLimit; i <= tallyOfFoundNumbers.Count; i++) {
                 //Debug.WriteLine($"[{i}]{prefixMessage}: {tallyOfFoundNumbers[i]}");
             }

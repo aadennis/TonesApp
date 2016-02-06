@@ -19,17 +19,6 @@ namespace Model.Test {
         }
 
         [TestMethod]
-        // There is an assumption in this that we are not interested in Unison... perhaps we should be?
-        public void UpperAndLowerNumbersAreNeverTheSame() {
-            TraceExecutingMethod();
-
-            for (var i = 0; i < MaxIterationsToTestForError; i++) {
-                var randomBoundaries = NumberUtilities.GetRandomInterval(1, 30, 7, Rand);
-                Assert.AreNotEqual(randomBoundaries[0], randomBoundaries[1]);
-            }
-        }
-
-        [TestMethod]
         public void UpperAndLowerNumbersAreAlwaysWithinRequestedDistance() {
             const int maxDistance = 7;
 
@@ -52,7 +41,7 @@ namespace Model.Test {
 
         [TestMethod]
         public void WithinALargeNumberOfIterationsEachNumberInTheRangeAppearsAMinimumNumberOfTimes() {
-            var tallyOfFoundNumbers = new SortedDictionary<object, int>();
+            var tallyOfFoundNumbers = new SortedDictionary<int, int>();
 
             const int minimumCountForANumberInTheRange = 50;
             for (var i = LowerLimit; i <= UpperLimit; i++) {

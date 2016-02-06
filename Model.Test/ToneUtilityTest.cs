@@ -18,6 +18,7 @@ namespace Model.Test {
         private readonly SpeechSynthesizer _synth = new SpeechSynthesizer();
 
         [TestMethod]
+        [TestCategory("SoundTest")]
         public void PlayAllNotes() {
             var setOfTones = new ToneUtility(); ;
             foreach (var note in setOfTones.GetAllNotes()) {
@@ -26,6 +27,7 @@ namespace Model.Test {
         }
 
         [TestMethod]
+        [TestCategory("SoundTest")]
         public void PlayIntervalsAndConfirmTheirName() {
 
             const int totalIterations = 1000;
@@ -52,6 +54,7 @@ namespace Model.Test {
         }
 
         [TestMethod]
+        [TestCategory("SoundTest")]
         public void SpeakAllTheIntervals() {
             var intervals = Intervals.GetAllIntervals();
             foreach (var interval in intervals) {
