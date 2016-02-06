@@ -36,7 +36,7 @@ namespace Model.Test {
             var setOfTones = new ToneUtility();
 
             for (var i = 0; i < totalIterations; i++) {
-                var intervalBoundaries = NumberUtilities.GetRandomInterval(0, 24, 12, _random);
+                var intervalBoundaries = NumberUtilities.GetRandomInterval(0, 24, 12, _random, NumberUtilities.Direction.Random);
                 setOfTones.PlayNote(notes.GetNoteFromIndex(intervalBoundaries[0]));
                 setOfTones.PlayNote(notes.GetNoteFromIndex(intervalBoundaries[1]));
                 Thread.Sleep(delayInSecondsBetweenAudioSnippets * 1000);

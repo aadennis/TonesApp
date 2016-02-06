@@ -42,10 +42,11 @@ namespace NotesApp {
         /// <param name="semiToneCount"></param>
         /// <returns>The description of the requested interval. For example "Minor seventh".</returns>
         public static string GetInterval(int semiToneCount) {
-            if (semiToneCount < 0 || semiToneCount > 12) {
+            var absSemitoneCount = Math.Abs(semiToneCount);
+            if (absSemitoneCount > 12) {
                 throw new ArgumentException($"Requested semi-tone count of [{semiToneCount}] is outside the allowed range");
             }
-            return IntervalSet.Single(interval => interval.SemiToneCount.Equals(semiToneCount)).Description;
+            return IntervalSet.Single(interval => interval.SemiToneCount.Equals(absSemitoneCount)).Description;
         }
     }
 }

@@ -2,7 +2,6 @@
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NotesApp;
-using System;
 using System.Collections.Generic;
 
 namespace Model.Test {
@@ -24,7 +23,7 @@ namespace Model.Test {
 
             TraceExecutingMethod();
             for (var i = 0; i < MaxIterationsToTestForError; i++) {
-                var randomBoundaries = NumberUtilities.GetRandomInterval(1, 30, 7, Rand);
+                var randomBoundaries = NumberUtilities.GetRandomInterval(1, 30, 7, RandomInterval);
                 Assert.IsTrue(maxInterval >= (randomBoundaries[1] - randomBoundaries[0]));
             }
         }
@@ -36,7 +35,7 @@ namespace Model.Test {
             const int maxInterval = 70000;
 
             TraceExecutingMethod();
-            var randomBoundaries = NumberUtilities.GetRandomInterval(lowerLimit, upperLimit, maxInterval, Rand);
+            var randomBoundaries = NumberUtilities.GetRandomInterval(lowerLimit, upperLimit, maxInterval, RandomInterval);
             Assert.AreEqual(upperLimit, randomBoundaries[0]);
             Assert.AreEqual(randomBoundaries[0], randomBoundaries[1]);
         }
@@ -54,7 +53,7 @@ namespace Model.Test {
 
             TraceExecutingMethod();
             for (var i = 0; i < MaxIterationsToTestForError; i++) {
-                var randomBoundaries = NumberUtilities.GetRandomInterval(LowerLimit, UpperLimit, MaxDistance, Rand);
+                var randomBoundaries = NumberUtilities.GetRandomInterval(LowerLimit, UpperLimit, MaxDistance, RandomInterval);
 
                 for (var x = randomBoundaries[0]; x <= randomBoundaries[1]; x++) {
                     tallyOfFoundNumbers[x]++;
@@ -64,9 +63,27 @@ namespace Model.Test {
             ShowDictionary(LowerLimit, tallyOfFoundNumbers, "Post population");
 
             foreach (var number in tallyOfFoundNumbers) {
-                Assert.IsFalse(number.Value < minimumCountForANumberInTheRange, 
+                Assert.IsFalse(number.Value < minimumCountForANumberInTheRange,
                     $"expected a count of at least [{minimumCountForANumberInTheRange}] for [{number}] but got only [{number.Value}]");
             }
+        }
+
+        [TestMethod]
+        public void DirectionOfSortedArrayIsCorrectlyReported() {
+            var interval = new List<int> {2, 3};
+
+            var direction = NumberUtilities.GetDirection(interval);
+            Assert.AreEqual(NumberUtilities.Direction.Ascending, direction, "Expected ascending");
+
+            interval[0] = 33;
+            interval[1] = 3;
+            direction = NumberUtilities.GetDirection(interval);
+            Assert.AreEqual(NumberUtilities.Direction.Descending, direction, "Expected descending");
+
+            interval[0] = 12;
+            interval[1] = 12;
+            direction = NumberUtilities.GetDirection(interval);
+            Assert.AreEqual(NumberUtilities.Direction.Ascending, direction, "Expected asccending if the values are the same");
         }
     }
 }

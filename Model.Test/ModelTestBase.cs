@@ -26,9 +26,9 @@ namespace Model.Test {
         protected void TestInitialize() {
             Debug.Listeners.Add(new TextWriterTraceListener(Console.Out));
             Debug.AutoFlush = true;
-            Rand = new Random();
+            RandomInterval = new Random();
         }
 
-        protected Random Rand;
+        protected Random RandomInterval;
     }
 }
