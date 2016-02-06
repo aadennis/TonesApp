@@ -27,7 +27,7 @@ namespace Model.Test {
         }
 
         [TestMethod]
-        [TestCategory("SoundTest")]
+        [TestCategory("SoundTestVeryLongDuration")]
         public void PlayIntervalsAndConfirmTheirName() {
 
             const int totalIterations = 1000;
@@ -62,9 +62,6 @@ namespace Model.Test {
                 Debug.WriteLine(wordsToSpeak);
                 _synth.Speak(wordsToSpeak);
             }
-
         }
     }
-
-
 }
