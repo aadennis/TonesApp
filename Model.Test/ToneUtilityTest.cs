@@ -47,7 +47,7 @@ namespace Model.Test {
                 var semitoneCount = intervalBoundaries[1] - intervalBoundaries[0];
                 var spokenInterval = Intervals.GetInterval(semitoneCount);
                 
-                _synth.Speak(spokenInterval);
+                _synth.Speak($"{spokenInterval},{NumberUtilities.GetDirection(intervalBoundaries)}");
                 Thread.Sleep(delayInSecondsBetweenAudioSnippets * 1000);
             }
 

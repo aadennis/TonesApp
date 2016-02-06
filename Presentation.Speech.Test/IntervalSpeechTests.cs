@@ -1,5 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Speech.Synthesis;
+using NotesApp;
 
 namespace Presentation.Speech.Test {
     [TestClass]
@@ -9,6 +10,8 @@ namespace Presentation.Speech.Test {
         public void VoiceCanBeHeard() {
             var synth = new SpeechSynthesizer();
             synth.Speak("This is an example of what to do");
+            synth.Speak(NumberUtilities.Direction.Ascending.ToString());
+
         }
     }
 }

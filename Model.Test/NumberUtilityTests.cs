@@ -83,7 +83,9 @@ namespace Model.Test {
             interval[0] = 12;
             interval[1] = 12;
             direction = NumberUtilities.GetDirection(interval);
-            Assert.AreEqual(NumberUtilities.Direction.Ascending, direction, "Expected asccending if the values are the same");
+            Assert.AreEqual(NumberUtilities.Direction.Ascending, direction, "Expected ascending if the values are the same");
+
+
         }
     }
 }
