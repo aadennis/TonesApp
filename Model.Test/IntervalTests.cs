@@ -118,6 +118,27 @@ namespace Model.Test {
         }
 
         [TestMethod]
+        public void PlayIntervalsAndConfirmTheirNameNoSound() {
+
+            const int totalIterations = 1000;
+            var notes = new MusicalNotes();
+            var upperLimit = notes.GetAllNotes().Count - 1;
+
+            for (var i = 0; i < totalIterations; i++) {
+                var intervalBoundaries = NumberUtilities.GetRandomInterval(0, upperLimit, 12, RandomInterval, NumberUtilities.Direction.Random);
+                notes.GetNoteFromIndex(intervalBoundaries[0]);
+                notes.GetNoteFromIndex(intervalBoundaries[1]);
+
+                var semitoneCount = intervalBoundaries[1] - intervalBoundaries[0];
+                var spokenInterval = Intervals.GetInterval(semitoneCount);
+
+                NumberUtilities.GetDirection(intervalBoundaries);
+            }
+
+        }
+
+
+        [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
         public void PassingInNullRandomToGetRandomIntervalThrowsException() {
             Random rand = null;

@@ -63,6 +63,13 @@ namespace NotesApp {
             return sortedInterval[1] >= sortedInterval[0] ? Direction.Ascending : Direction.Descending;
         }
 
+        public static string GetSpokenDirection(Direction direction) {
+            if (direction == Direction.Descending) {
+                return Direction.Descending.ToString();
+            }
+            return string.Empty;
+        }
+
         private static int GetRandomDirection() {
             return RandomDirection.Next(0, 2);
         }

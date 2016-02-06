@@ -87,5 +87,13 @@ namespace Model.Test {
 
 
         }
+
+        [TestMethod]
+        public void OnlyDescendingDirectionIsSpoken() {
+            Assert.AreEqual("Descending", NumberUtilities.GetSpokenDirection(NumberUtilities.Direction.Descending));
+            Assert.AreEqual(string.Empty, NumberUtilities.GetSpokenDirection(NumberUtilities.Direction.Ascending));
+
+        }
+
     }
 }

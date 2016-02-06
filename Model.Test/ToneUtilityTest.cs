@@ -34,9 +34,10 @@ namespace Model.Test {
             const int delayInSecondsBetweenAudioSnippets = 5;
             var notes = new MusicalNotes();   
             var setOfTones = new ToneUtility();
+            var upperLimit = notes.GetAllNotes().Count - 1;
 
             for (var i = 0; i < totalIterations; i++) {
-                var intervalBoundaries = NumberUtilities.GetRandomInterval(0, 24, 12, _random, NumberUtilities.Direction.Random);
+                var intervalBoundaries = NumberUtilities.GetRandomInterval(0, upperLimit, 12, _random, NumberUtilities.Direction.Random);
                 setOfTones.PlayNote(notes.GetNoteFromIndex(intervalBoundaries[0]));
                 setOfTones.PlayNote(notes.GetNoteFromIndex(intervalBoundaries[1]));
                 Thread.Sleep(delayInSecondsBetweenAudioSnippets * 1000);
@@ -47,12 +48,13 @@ namespace Model.Test {
                 var semitoneCount = intervalBoundaries[1] - intervalBoundaries[0];
                 var spokenInterval = Intervals.GetInterval(semitoneCount);
                 
-                _synth.Speak($"{spokenInterval},{NumberUtilities.GetDirection(intervalBoundaries)}");
+                _synth.Speak($"{spokenInterval}; {NumberUtilities.GetSpokenDirection(NumberUtilities.GetDirection(intervalBoundaries))}");
                 Thread.Sleep(delayInSecondsBetweenAudioSnippets * 1000);
             }
 
         }
 
+      
         [TestMethod]
         [TestCategory("SoundTest")]
         public void SpeakAllTheIntervals() {

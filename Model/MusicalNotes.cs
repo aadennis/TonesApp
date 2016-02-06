@@ -45,6 +45,9 @@ namespace NotesApp {
         }
 
         public MusicalNote GetNoteFromIndex(int index) {
+            if (_notes.ElementAtOrDefault(index) == null) {
+                throw new KeyNotFoundException($"No MusicalNote found with an index of [{index}]");
+            }
             return _notes[index];
         }
     }

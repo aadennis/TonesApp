@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NotesApp;
 
@@ -32,6 +33,20 @@ namespace Model.Test {
             var frequency = notes.GetNoteFromIndex(KnownIndexForFrequency).Frequency;
             Assert.AreEqual(TestFrequency, frequency);
 
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(KeyNotFoundException))]
+        public void GettingFrequencyViaNonValidIndexThrowsException() {
+            TraceExecutingMethod();
+            var notes = new MusicalNotes();
+            try {
+                var dummy = notes.GetNoteFromIndex(999).Frequency;
+            }
+            catch (KeyNotFoundException e) {
+                Assert.AreEqual("No MusicalNote found with an index of [999]", e.Message);
+                throw;
+            }
         }
 
         [TestMethod]
