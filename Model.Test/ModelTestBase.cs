@@ -18,9 +18,6 @@ namespace Model.Test {
         }
 
         protected static void ShowDictionary(int lowerLimit, SortedDictionary<int, int> tallyOfFoundNumbers, string prefixMessage) {
-            for (var i = lowerLimit; i <= tallyOfFoundNumbers.Count; i++) {
-                //Debug.WriteLine($"[{i}]{prefixMessage}: {tallyOfFoundNumbers[i]}");
-            }
         }
 
         protected void TestInitialize() {

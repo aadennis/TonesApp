@@ -103,8 +103,8 @@ namespace Model.Test {
             var gotAscending = false;
             TraceExecutingMethod();
             for (var i = 0; i < 10; i++) {
-                var randomBoundaries = 
-                    NumberUtilities.GetRandomInterval(LowerLimit, UpperLimit, MaxDistance, 
+                var randomBoundaries =
+                    NumberUtilities.GetRandomInterval(LowerLimit, UpperLimit, MaxDistance,
                         RandomInterval, NumberUtilities.Direction.Random);
                 if (randomBoundaries[1] > randomBoundaries[0]) {
                     gotAscending = true;
@@ -128,10 +128,6 @@ namespace Model.Test {
                 var intervalBoundaries = NumberUtilities.GetRandomInterval(0, upperLimit, 12, RandomInterval, NumberUtilities.Direction.Random);
                 notes.GetNoteFromIndex(intervalBoundaries[0]);
                 notes.GetNoteFromIndex(intervalBoundaries[1]);
-
-                var semitoneCount = intervalBoundaries[1] - intervalBoundaries[0];
-                var spokenInterval = Intervals.GetInterval(semitoneCount);
-
                 NumberUtilities.GetDirection(intervalBoundaries);
             }
 

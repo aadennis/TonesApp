@@ -1,7 +1,7 @@
-﻿using System;
-using System.Threading;
-using NotesApp;
+﻿using NotesApp;
+using System;
 using System.Speech.Synthesis;
+using System.Threading;
 
 namespace ConsoleExecution {
 
@@ -23,17 +23,15 @@ namespace ConsoleExecution {
 
     public class ToneGenerator {
 
-        private readonly Random _random = new Random();
         private readonly SpeechSynthesizer _synth = new SpeechSynthesizer();
+        private Random _random = new Random();
 
         public void PlayAllNotes() {
-            
+
             const int totalIterations = 1000;
             const int delayInSecondsBetweenAudioSnippets = 5;
             var notes = new MusicalNotes();
             var setOfTones = new ToneUtility();
-            var _random = new Random();
-
             var frequencies = notes.GetAllFrequencies();
 
             for (var i = 0; i < totalIterations; i++) {
