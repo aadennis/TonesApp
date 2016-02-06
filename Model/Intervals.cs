@@ -3,6 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 
 namespace NotesApp {
+
+    /// <summary>
+    /// The collection of all intervals that can be used in an Equal-Tempered scale.
+    /// There is a total of 13: the terms "Augmented fourth", "Diminished fifth", and "Tritone"
+    /// are all covered by the term "Augmented fourth".
+    /// </summary>
     public static class Intervals {
 
         private static readonly List<Interval> IntervalSet = new List<Interval> {
@@ -22,13 +28,19 @@ namespace NotesApp {
         };
 
         /// <summary>
-        /// 
+        /// Gets the collection of all intervals
         /// </summary>
-        /// <returns></returns>
+        /// <returns>the set of intervals</returns>
         public static List<Interval> GetAllIntervals() {
             return IntervalSet;
         }
 
+        /// <summary>
+        /// Given an key expressed as a count of inclusive semitones, return the interval matching that 
+        /// count. An exception is thrown if the requested key is outside the supported range.
+        /// </summary>
+        /// <param name="semiToneCount"></param>
+        /// <returns>The description of the requested interval. For example "Minor seventh".</returns>
         public static string GetInterval(int semiToneCount) {
             if (semiToneCount < 0 || semiToneCount > 12) {
                 throw new ArgumentException($"Requested semi-tone count of [{semiToneCount}] is outside the allowed range");
