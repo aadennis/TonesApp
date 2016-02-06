@@ -69,6 +69,10 @@
       <Project>{51c78c27-a343-4249-9e49-85075275e524}</Project>
       <Name>Model</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Speaking\Speaking.csproj">
+      <Project>{b8ae683d-edb7-4bbd-8303-b1335e608071}</Project>
+      <Name>Speaking</Name>
+    </ProjectReference>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

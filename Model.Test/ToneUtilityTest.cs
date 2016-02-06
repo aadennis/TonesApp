@@ -2,7 +2,7 @@
 using NotesApp;
 using System;
 using System.Diagnostics;
-using System.Speech.Synthesis;
+using Speaking;
 
 namespace Model.Test {
 
@@ -14,7 +14,7 @@ namespace Model.Test {
     public class ToneUtilityTest {
 
         private readonly Random _random = new Random();
-        private readonly SpeechSynthesizer _synth = new SpeechSynthesizer();
+        private readonly Speech _synth = new Speech();
 
         [TestMethod]
         [TestCategory("SoundTest")]
@@ -29,14 +29,28 @@ namespace Model.Test {
         [TestCategory("SoundTestVeryLongDuration")]
         public void PlayIntervalsAndConfirmTheirName() {
 
-            const int totalIterations = 1000;
+            const int totalIterations = 300;
+            const int sectionCount = 6;
+            const int iterationsPerSection = totalIterations / sectionCount;
+            const int secondsToSleep = 5;
             var notes = new MusicalNotes();
             var setOfTones = new ToneUtility();
             var upperLimit = notes.GetAllNotes().Count - 1;
 
             for (var i = 0; i < totalIterations; i++) {
-                var intervalBoundaries = NumberUtilities.GetRandomInterval(0, upperLimit, 12, _random, NumberUtilities.Direction.Random);
-                setOfTones.PlayIntervalWithCommentary(intervalBoundaries, 5);
+                // do a break so that the listener has time to consolidate a bit
+                if (i == 0) {
+                    _synth.Speak("This is; Musical Intervals: Section 1");
+                    
+                }
+                else
+                if (i % iterationsPerSection == 0) {
+                    _synth.Speak($"This is; Musical Intervals: Section {i / iterationsPerSection + 1}");
+                }
+                //we want substantially more ascending than descending intervals - this spread gives about 80%:
+                var currentDirectionType = i % 3 == 0 ? NumberUtilities.Direction.Random : NumberUtilities.Direction.Ascending;
+                var interval = NumberUtilities.GetRandomInterval(0, upperLimit, 12, _random, currentDirectionType);
+                setOfTones.PlayIntervalWithCommentary(interval, secondsToSleep);
             }
         }
 

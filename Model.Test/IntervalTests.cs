@@ -121,16 +121,35 @@ namespace Model.Test {
         public void PlayIntervalsAndConfirmTheirNameNoSound() {
 
             const int totalIterations = 1000;
+            const int sectionCount = 5;
+            var iterationsPerSection = totalIterations/sectionCount;
+
             var notes = new MusicalNotes();
             var upperLimit = notes.GetAllNotes().Count - 1;
+            var directionTally = new Dictionary<int, int> {
+                {(int) NumberUtilities.Direction.Ascending, 0},
+                {(int) NumberUtilities.Direction.Descending, 0}
+            };
 
             for (var i = 0; i < totalIterations; i++) {
-                var intervalBoundaries = NumberUtilities.GetRandomInterval(0, upperLimit, 12, RandomInterval, NumberUtilities.Direction.Random);
-                notes.GetNoteFromIndex(intervalBoundaries[0]);
-                notes.GetNoteFromIndex(intervalBoundaries[1]);
-                NumberUtilities.GetDirection(intervalBoundaries);
+                // do a break so that the listener has time to consolidate a bit
+                if (i == 0) {
+                    Debug.WriteLine($"Section 1");
+                } else 
+                if (i%iterationsPerSection == 0) {
+                    Debug.WriteLine($"Section {i/iterationsPerSection + 1}");
+                }
+                //we want substantially more ascending than descending:
+                var currentDirectionType = i%3 == 0 ? NumberUtilities.Direction.Random : NumberUtilities.Direction.Ascending;
+
+                var interval = NumberUtilities.GetRandomInterval(0, upperLimit, 12, RandomInterval, currentDirectionType);
+                notes.GetNoteFromIndex(interval[0]);
+                notes.GetNoteFromIndex(interval[1]);
+                directionTally[(int) NumberUtilities.GetDirection(interval)]++;
             }
 
+            Debug.WriteLine(directionTally[0]);
+            Debug.WriteLine(directionTally[1]);
         }
 
 
