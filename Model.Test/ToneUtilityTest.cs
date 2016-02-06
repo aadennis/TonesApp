@@ -1,9 +1,8 @@
-﻿using System;
-using System.Diagnostics;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NotesApp;
+using System;
+using System.Diagnostics;
 using System.Speech.Synthesis;
-using System.Threading;
 
 namespace Model.Test {
 
@@ -31,30 +30,17 @@ namespace Model.Test {
         public void PlayIntervalsAndConfirmTheirName() {
 
             const int totalIterations = 1000;
-            const int delayInSecondsBetweenAudioSnippets = 5;
-            var notes = new MusicalNotes();   
+            var notes = new MusicalNotes();
             var setOfTones = new ToneUtility();
             var upperLimit = notes.GetAllNotes().Count - 1;
 
             for (var i = 0; i < totalIterations; i++) {
                 var intervalBoundaries = NumberUtilities.GetRandomInterval(0, upperLimit, 12, _random, NumberUtilities.Direction.Random);
-                setOfTones.PlayNote(notes.GetNoteFromIndex(intervalBoundaries[0]));
-                setOfTones.PlayNote(notes.GetNoteFromIndex(intervalBoundaries[1]));
-                Thread.Sleep(delayInSecondsBetweenAudioSnippets * 1000);
-                setOfTones.PlayNote(notes.GetNoteFromIndex(intervalBoundaries[0]));
-                setOfTones.PlayNote(notes.GetNoteFromIndex(intervalBoundaries[1]));
-                Thread.Sleep(delayInSecondsBetweenAudioSnippets * 1000);
-
-                var semitoneCount = intervalBoundaries[1] - intervalBoundaries[0];
-                var spokenInterval = Intervals.GetInterval(semitoneCount);
-                
-                _synth.Speak($"{spokenInterval}; {NumberUtilities.GetSpokenDirection(NumberUtilities.GetDirection(intervalBoundaries))}");
-                Thread.Sleep(delayInSecondsBetweenAudioSnippets * 1000);
+                setOfTones.PlayIntervalWithCommentary(intervalBoundaries, 5);
             }
-
         }
 
-      
+
         [TestMethod]
         [TestCategory("SoundTest")]
         public void SpeakAllTheIntervals() {
