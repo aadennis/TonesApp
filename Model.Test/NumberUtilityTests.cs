@@ -19,23 +19,25 @@ namespace Model.Test {
         }
 
         [TestMethod]
-        public void UpperAndLowerNumbersAreAlwaysWithinRequestedDistance() {
-            const int maxDistance = 7;
+        public void UpperAndLowerNumbersAreAlwaysWithinRequestedMaxInterval() {
+            const int maxInterval = 7;
 
             TraceExecutingMethod();
             for (var i = 0; i < MaxIterationsToTestForError; i++) {
                 var randomBoundaries = NumberUtilities.GetRandomInterval(1, 30, 7, Rand);
-                Assert.IsTrue(maxDistance >= (randomBoundaries[1] - randomBoundaries[0]));
+                Assert.IsTrue(maxInterval >= (randomBoundaries[1] - randomBoundaries[0]));
             }
         }
 
         [TestMethod]
-        public void ReturnInputIfRequestedUpperAndLowerLimitsMatch() {
+        public void ReturnInputIfRequestedUpperAndLowerLimitsAreEqual() {
             const int upperLimit = 7;
             const int lowerLimit = upperLimit;
+            const int maxInterval = 70000;
 
             TraceExecutingMethod();
-            var randomBoundaries = NumberUtilities.GetRandomInterval(lowerLimit, upperLimit, 70000, Rand);
+            var randomBoundaries = NumberUtilities.GetRandomInterval(lowerLimit, upperLimit, maxInterval, Rand);
+            Assert.AreEqual(upperLimit, randomBoundaries[0]);
             Assert.AreEqual(randomBoundaries[0], randomBoundaries[1]);
         }
 
@@ -63,10 +65,8 @@ namespace Model.Test {
 
 
             foreach (var number in tallyOfFoundNumbers) {
-                if (number.Value < minimumCountForANumberInTheRange) {
-                    throw new Exception($"expected a count of at least [{minimumCountForANumberInTheRange}] for [{number}] but got only [{number.Value}]");
-                }
-
+                Assert.IsFalse(number.Value < minimumCountForANumberInTheRange, 
+                    $"expected a count of at least [{minimumCountForANumberInTheRange}] for [{number}] but got only [{number.Value}]");
             }
         }
     }
