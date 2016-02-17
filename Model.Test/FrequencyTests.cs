@@ -10,18 +10,19 @@ namespace Model.Test {
 
         private const int TestFrequency = 147;
         private const int KnownIndexForFrequency = 2;
+        private readonly IToneProvider _toneProvider = new ToneProvider();
 
         [TestMethod]
         public void FrequencyDictionaryHas2OctavesOfNotes() {
             TraceExecutingMethod();
-            var frequencyCount = new ToneUtility().GetAllNotes().Count;
+            var frequencyCount = new NoteUtility(_toneProvider).GetAllNotes().Count;
             Assert.AreEqual((12 * 2), frequencyCount);
         }
 
         [TestMethod]
         public void RequestForFrequencyC3ReturnsExpectedElements() {
             TraceExecutingMethod();
-            var toneSet = new ToneUtility();
+            var toneSet = new NoteUtility(_toneProvider);
             Assert.AreEqual("D", toneSet.GetNoteElements(TestFrequency).Note);
             Assert.AreEqual(3, toneSet.GetNoteElements(TestFrequency).Octave);
         }
@@ -65,7 +66,7 @@ namespace Model.Test {
         [ExpectedException(typeof(ArgumentException))]
         public void RequestForNotFoundFrequencyThrowsException() {
             TraceExecutingMethod();
-            var toneSet = new ToneUtility();
+            var toneSet = new NoteUtility(_toneProvider);
             try {
                 toneSet.GetNoteElements(9999);
             }

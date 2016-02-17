@@ -15,11 +15,12 @@ namespace Model.Test {
 
         private readonly Random _random = new Random();
         private readonly Speech _synth = new Speech();
+        private readonly IToneProvider _toneProvider = new ToneProvider();
 
         [TestMethod]
         [TestCategory("SoundTest")]
         public void PlayAllNotes() {
-            var setOfTones = new ToneUtility(); ;
+            var setOfTones = new NoteUtility(_toneProvider); ;
             foreach (var note in setOfTones.GetAllNotes()) {
                 setOfTones.PlayNote(note);
             }
@@ -34,7 +35,7 @@ namespace Model.Test {
             const int iterationsPerSection = totalIterations / sectionCount;
             const int secondsToSleep = 5;
             var notes = new MusicalNotes();
-            var setOfTones = new ToneUtility();
+            var setOfTones = new NoteUtility(_toneProvider);
             var upperLimit = notes.GetAllNotes().Count - 1;
 
             for (var i = 0; i < totalIterations; i++) {

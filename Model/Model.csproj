@@ -47,13 +47,15 @@
   <ItemGroup>
     <Compile Include="Interval.cs" />
     <Compile Include="Intervals.cs" />
+    <Compile Include="IToneProvider.cs" />
     <Compile Include="MusicalNote.cs" />
     <Compile Include="MusicalNotes.cs" />
     <Compile Include="NoteDescription.cs" />
     <Compile Include="NoteDescriptions.cs" />
     <Compile Include="NumberUtilities.cs" />
     <Compile Include="SineWaveProvider32.cs" />
-    <Compile Include="ToneUtility.cs" />
+    <Compile Include="ToneProvider.cs" />
+    <Compile Include="NoteUtility.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
