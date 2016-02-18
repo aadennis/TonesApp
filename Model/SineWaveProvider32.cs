@@ -2,11 +2,19 @@
 using NAudio.Wave;
 
 namespace NotesApp {
+
+
+    //http://mark-dot-net.blogspot.co.uk/2009/10/playback-of-sine-wave-in-naudio.html
     public class SineWaveProvider32 : WaveProvider32 {
         private int _sample;
 
         public SineWaveProvider32() {
-            Frequency = 1000;
+            Frequency = 200;
+            Amplitude = 0.25f; // let's not hurt our ears            
+        }
+
+        public SineWaveProvider32(int s, int c) : base(s,c) {
+            Frequency = 2000;
             Amplitude = 0.25f; // let's not hurt our ears            
         }
 
@@ -22,5 +30,6 @@ namespace NotesApp {
             }
             return sampleCount;
         }
+
     }
 }

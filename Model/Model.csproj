@@ -50,6 +50,7 @@
     <Compile Include="IToneProvider.cs" />
     <Compile Include="MusicalNote.cs" />
     <Compile Include="MusicalNotes.cs" />
+    <Compile Include="NAudioSineWave.cs" />
     <Compile Include="NoteDescription.cs" />
     <Compile Include="NoteDescriptions.cs" />
     <Compile Include="NumberUtilities.cs" />

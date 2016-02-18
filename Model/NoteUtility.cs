@@ -16,8 +16,8 @@ namespace NotesApp {
 
 
         private const int Duration = 1000;
-        private static int _samples = 441 * Duration / 10;
-        private static readonly int Bytes = _samples * 4;
+        private const int Samples = 441*Duration/10;
+        private static readonly int Bytes = Samples * 4;
 
         private readonly MusicalNotes _notes = new MusicalNotes();
         private readonly SpeechSynthesizer _synth = new SpeechSynthesizer();
