@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using NAudio;
-using NAudio.Wave;
+﻿using NAudio.Wave;
 
 namespace NotesApp {
 
@@ -12,23 +6,28 @@ namespace NotesApp {
     public class NAudioSineWave : IToneProvider {
 
         private SineWaveProvider32 _sineWave;
-        private WaveOut _waveOut;
+        private static WaveOut _waveOut;
+        private float _amplitude;
 
-
-        public NAudioSineWave() {
+        public NAudioSineWave(float amplitude) {
             _sineWave = new SineWaveProvider32();
-            _sineWave.SetWaveFormat(44100, 1);
-            _sineWave.Amplitude = 10.25f;
-            
+            _sineWave.Amplitude = (float)amplitude;
+
+
+
         }
 
-        public void PlayTone(int frequency, double duration = 1.000000001) {
-
+        public void PlayTone(int frequency, double duration) {
+            _sineWave.Frequency = frequency;
+            ;
+            _sineWave.SetWaveFormat(44100, 1);
             using (_waveOut = new WaveOut()) {
                 _waveOut.DeviceNumber = 0;
                 _waveOut.Init(_sineWave);
                 _waveOut.Play();
-               System.Threading.Thread.Sleep(5000);
+                System.Threading.Thread.Sleep(2000);
+                _waveOut.Stop();
+                _waveOut = null;
             }
         }
 

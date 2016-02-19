@@ -25,7 +25,7 @@ namespace ConsoleExecution {
 
         private readonly SpeechSynthesizer _synth = new SpeechSynthesizer();
         private readonly Random _random = new Random();
-        private readonly IToneProvider _toneProvider = new ToneProvider();
+        private readonly IToneProvider _toneProvider = new ToneProvider(1.0f);
 
         public void PlayAllNotes() {
 

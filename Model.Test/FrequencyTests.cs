@@ -10,7 +10,7 @@ namespace Model.Test {
 
         private const int TestFrequency = 147;
         private const int KnownIndexForFrequency = 2;
-        private readonly IToneProvider _toneProvider = new ToneProvider();
+        private readonly IToneProvider _toneProvider = new ToneProvider(1.0f);
 
         [TestMethod]
         public void FrequencyDictionaryHas2OctavesOfNotes() {

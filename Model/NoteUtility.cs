@@ -17,7 +17,7 @@ namespace NotesApp {
 
         private const int Duration = 1000;
         private const int Samples = 441*Duration/10;
-        private static readonly int Bytes = Samples * 4;
+        private const double Amplitude = 1.0f;
 
         private readonly MusicalNotes _notes = new MusicalNotes();
         private readonly SpeechSynthesizer _synth = new SpeechSynthesizer();
@@ -38,7 +38,7 @@ namespace NotesApp {
 
         public void PlayNote(MusicalNote note) {
             Console.WriteLine("[{0}][{1}]", note.Frequency, note.Note);
-            _toneProvider.PlayTone(note.Frequency);
+            _toneProvider.PlayTone(note.Frequency, 1);
         }
 
         public void PlayIntervalWithCommentary(List<int> interval, int delayInSeconds) {

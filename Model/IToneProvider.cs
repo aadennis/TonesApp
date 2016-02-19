@@ -10,6 +10,8 @@
         /// </summary>
         /// <param name="frequency">the required frequency in Hertz</param>
         /// <param name="duration">the required duration in seconds</param>
-        void PlayTone(int frequency, double duration = 1.000000001);
+        void PlayTone(int frequency, double duration);
+
+
     }
 }

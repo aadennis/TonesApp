@@ -1,5 +1,5 @@
-﻿using System;
-using NAudio.Wave;
+﻿using NAudio.Wave;
+using System;
 
 namespace NotesApp {
 
@@ -8,15 +8,6 @@ namespace NotesApp {
     public class SineWaveProvider32 : WaveProvider32 {
         private int _sample;
 
-        public SineWaveProvider32() {
-            Frequency = 200;
-            Amplitude = 0.25f; // let's not hurt our ears            
-        }
-
-        public SineWaveProvider32(int s, int c) : base(s,c) {
-            Frequency = 2000;
-            Amplitude = 0.25f; // let's not hurt our ears            
-        }
 
         public float Frequency { get; set; }
         public float Amplitude { get; set; }

@@ -5,9 +5,13 @@ namespace NotesApp {
 
     /// <summary>
     /// Defines a collection of notes. In practice and currently, these are the 2 chromatic octaves
-    /// starting with C at frequency 131Hz
+    /// starting with C at frequency 131Hz.
+    /// Amplitude/volume is not an attribute of this collection.
     /// </summary>
     public class MusicalNotes {
+
+
+
         //http://www.phy.mtu.edu/~suits/notefreqs.html
         private static readonly List<MusicalNote> _notes = new List<MusicalNote> {
             new MusicalNote {Frequency = 131, Note = "C", Octave = 3},

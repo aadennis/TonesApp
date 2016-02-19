@@ -15,8 +15,11 @@ namespace Model.Test {
 
         private readonly Random _random = new Random();
         private readonly Speech _synth = new Speech();
-        private readonly IToneProvider _toneProvider = new ToneProvider();
-        private readonly IToneProvider _nAudioToneProvider = new NAudioSineWave();
+        private readonly IToneProvider _toneProvider = new ToneProvider(1.0f);
+        private readonly IToneProvider _nAudioToneProvider = new NAudioSineWave(1.0f);
+
+
+
 
 
         [TestMethod]
@@ -31,6 +34,7 @@ namespace Model.Test {
         [TestMethod]
         [TestCategory("SoundTest")]
         public void PlayAllNotesWithNAudioToneProvider() {
+
             var setOfTones = new NoteUtility(_nAudioToneProvider); 
             foreach (var note in setOfTones.GetAllNotes()) {
                 setOfTones.PlayNote(note);
