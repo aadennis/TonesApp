@@ -18,10 +18,11 @@ namespace NotesApp {
 
         /// <summary>
         ///  Return a pair of random integers, where the first is always lower than
-        ///  the second (or can be equal to the second, for unison), and there is not more than maxDistance 
+        ///  the second, and there is not more than maxDistance 
         ///  between the returned integers.   Keeping this interval close is because the main usecase is a musical interval test
         ///  where a large distance would not help with aural training.
         ///  It helps if the Random passed in has been used in previous calls, to help entropy.
+        ///  Unison is not supported, as it is too easy to spot, unless there is a large time gap between the 2 notes.
         /// 
         ///  Note that Random.Next returns an integer that is LESS than the upper limit argument,
         ///  whereas the returned integer is > OR EQUAL TO the lower limit argument.
@@ -34,6 +35,8 @@ namespace NotesApp {
                 throw new ArgumentNullException(nameof(rand));
             }
 
+            // This is effectively asking for unison. todo - decide what to do. If it was explicitly requested, then
+            // probably the caller knew what they wanted
             if (lowerLimit.Equals(upperLimit)) {
                 return SortArrayBasedOnDirection(new List<int> { lowerLimit, upperLimit }, (Direction)direction);
             }
@@ -42,7 +45,7 @@ namespace NotesApp {
             var lowerAndUpperLimit = new List<int> { rand.Next(lowerLimit, upperLimit) };
             var nextNote = rand.Next(lowerLimit, upperLimit);
             var count = 0;
-            while (Math.Abs(lowerAndUpperLimit[0] - nextNote) > maxDistance) {
+            while (Math.Abs(lowerAndUpperLimit[0] - nextNote) > maxDistance || lowerAndUpperLimit[0].Equals(nextNote)) {
                 if (count++ > maxIterations) {
                     throw new Exception("Too many iterations");
                 }

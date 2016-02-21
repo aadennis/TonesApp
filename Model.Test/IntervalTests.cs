@@ -77,7 +77,7 @@ namespace Model.Test {
         }
 
         [TestMethod]
-        public void WithinALargeNumberOfIterationsAllTheIntervalsAppearAtLeastOnce() {
+        public void WithinALargeNumberOfIterationsAllTheIntervalsExceptUnisonAppearAtLeastOnce() {
             var dictionaryOfSemiToneCounts = new SortedDictionary<int, int>();
 
             TraceExecutingMethod();
@@ -91,7 +91,8 @@ namespace Model.Test {
 
             }
 
-            for (var i = 0; i <= Intervals.GetAllIntervals().Count; i++) {
+            // 0 is unison and not supported, so test starts from 1
+            for (var i = 1; i <= Intervals.GetAllIntervals().Count; i++) {
                 Assert.IsTrue(dictionaryOfSemiToneCounts.ContainsKey(i), $"could not find key for {i}");
                 Debug.WriteLine($"{i}: count: {dictionaryOfSemiToneCounts[i]}");
             }

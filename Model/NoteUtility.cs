@@ -9,22 +9,38 @@ using System.Threading;
 namespace NotesApp {
 
     /// <summary>
-    /// 
+    /// Wraps both the tone provision, and the voice used for speaking the intervals.
+    /// The voice is spoken synchronously, as we don't want the tone and the voice happening at the same time.
     /// </summary>
     public class NoteUtility {
 
 
 
         private const int Duration = 1000;
-        private const int Samples = 441*Duration/10;
-        private const double Amplitude = 1.0f;
+        private const string StandardVoice = "Microsoft Hazel Desktop";
 
         private readonly MusicalNotes _notes = new MusicalNotes();
         private readonly SpeechSynthesizer _synth = new SpeechSynthesizer();
         private readonly IToneProvider _toneProvider;
 
-        public NoteUtility(IToneProvider toneProvider) {
+        /// <summary>
+        /// todo - the voice should be injected as an interface wrapping Speech.Synth, so we can test for invalid voice behaviour using a mock
+        /// </summary>
+        /// <param name="toneProvider"></param>
+        /// <param name="voice"></param>
+        public NoteUtility(IToneProvider toneProvider, string voice = StandardVoice) {
             _toneProvider = toneProvider;
+            try {
+                _synth.SelectVoice(voice);
+            }
+            catch (ArgumentException e) {
+                if (e.Message.Contains("not set voice")) {
+                    SetFallbackVoice();
+                }
+                else {
+                    throw;
+                }
+            }
         }
 
         public MusicalNote GetNoteElements(int frequency) {
@@ -64,10 +80,22 @@ namespace NotesApp {
             }
         }
 
+        private void SetFallbackVoice() {
+            _synth.SelectVoiceByHints(VoiceGender.Neutral);
+        }
+
         public List<MusicalNote> GetAllNotes() {
             return _notes.GetAllNotes();
         }
 
+        /// <summary>
+        /// Wraps the synchronous call to the Speech Synth. 
+        /// </summary>
+        /// <param name="message"></param>
+
+        public void Speak(string message) {
+            _synth.Speak(message);
+        }
 
     }
 }

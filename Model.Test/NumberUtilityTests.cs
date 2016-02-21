@@ -28,6 +28,18 @@ namespace Model.Test {
             }
         }
 
+        /// <summary>
+        /// As unison is too easy to spot as an interval, in my opinion, make sure it never occurs
+        /// </summary>
+        [TestMethod]
+        public void UnisonDoesNotOccurWithinRequestedMaxIterations() {
+            TraceExecutingMethod();
+            for (var i = 0; i < MaxIterationsToTestForError; i++) {
+                var randomBoundaries = NumberUtilities.GetRandomInterval(1, 30, 7, RandomInterval);
+                Assert.AreNotEqual(randomBoundaries[1], randomBoundaries[0]);
+            }
+        }
+
         [TestMethod]
         public void ReturnInputIfRequestedUpperAndLowerLimitsAreEqual() {
             const int upperLimit = 7;

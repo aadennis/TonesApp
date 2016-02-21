@@ -19,7 +19,9 @@ namespace Model.Test {
         private readonly IToneProvider _nAudioToneProvider = new NAudioSineWave(1.0f);
 
 
+        public ToneUtilityTest() {
 
+        }
 
 
         [TestMethod]
@@ -35,10 +37,17 @@ namespace Model.Test {
         [TestCategory("SoundTest")]
         public void PlayAllNotesWithNAudioToneProvider() {
 
-            var setOfTones = new NoteUtility(_nAudioToneProvider); 
+            var setOfTones = new NoteUtility(_nAudioToneProvider);
             foreach (var note in setOfTones.GetAllNotes()) {
                 setOfTones.PlayNote(note);
             }
+        }
+
+        [TestMethod]
+        [TestCategory("SoundTest")]
+        public void VoiceCallingNoteUtilitySoundsAsExpected() {
+            var setOfTones = new NoteUtility(_nAudioToneProvider);
+            setOfTones.Speak("what voice am I?");
         }
 
         [TestMethod]
