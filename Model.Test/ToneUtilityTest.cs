@@ -2,6 +2,7 @@
 using NotesApp;
 using System;
 using System.Diagnostics;
+using System.Speech.Synthesis;
 using Speaking;
 
 namespace Model.Test {
@@ -82,13 +83,30 @@ namespace Model.Test {
 
         [TestMethod]
         [TestCategory("SoundTest")]
-        public void SpeakAllTheIntervals() {
+        public void SpeakAllTheIntervalsUsingSynthesis() {
             var intervals = Intervals.GetAllIntervals();
             foreach (var interval in intervals) {
                 string wordsToSpeak = $"SemitoneCount: {interval.SemiToneCount};{interval.Description}";
                 Debug.WriteLine(wordsToSpeak);
                 _synth.Speak(wordsToSpeak);
             }
+        }
+
+        [TestMethod]
+        [TestCategory("SoundTest")]
+        public void SpeakAllTheIntervalsUsingStoredAudio() {
+            var intervals = Intervals.GetAllIntervals();
+            foreach (var interval in intervals) {
+                string wordsToSpeak = $"SemitoneCount: {interval.SemiToneCount};{interval.Description}";
+                Debug.WriteLine(wordsToSpeak);
+                _synth.Speak(wordsToSpeak);
+            }
+        }
+
+        [TestMethod]
+        [TestCategory("SoundTest")]
+        public void PromptBuilderBasicTest() {  
+            _synth.SpeakWithPromptBuilder();
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Speech.Synthesis;
 
 namespace NotesApp {
 
@@ -27,6 +28,11 @@ namespace NotesApp {
             new Interval {SemiToneCount = 12, Description = "Perfect octave"}
         };
 
+        private static string GetAudioFolder()
+        {
+            return @"c:\temp";
+        }
+
         /// <summary>
         /// Gets the collection of all intervals
         /// </summary>
@@ -40,13 +46,20 @@ namespace NotesApp {
         /// count. An exception is thrown if the requested key is outside the supported range.
         /// </summary>
         /// <param name="semiToneCount"></param>
-        /// <returns>The description of the requested interval. For example "Minor seventh".</returns>
-        public static string GetInterval(int semiToneCount) {
+        /// <param name="isAudio">If this is true, then the returned string is the location of the audio file,
+        /// e.g. "{wav folder}/MinorSeventh.wav" </param>
+        /// <returns>The description or audio location of the requested interval. For example "Minor seventh".</returns>
+        public static string GetInterval(int semiToneCount, bool isAudio = false) {
             var absSemitoneCount = Math.Abs(semiToneCount);
             if (absSemitoneCount > 12) {
                 throw new ArgumentException($"Requested semi-tone count of [{semiToneCount}] is outside the allowed range");
             }
-            return IntervalSet.Single(interval => interval.SemiToneCount.Equals(absSemitoneCount)).Description;
+            var xxx = IntervalSet.Single(interval => interval.SemiToneCount.Equals(absSemitoneCount)).Description;
+            if (!isAudio)
+            {
+                return xxx;
+            }
+            return StringUtilities.StringUtility.PascalCaseWithSuffix(GetAudioFolder(), xxx);
         }
     }
 }

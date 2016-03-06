@@ -1,4 +1,5 @@
-﻿using System.Speech.Synthesis;
+﻿using System;
+using System.Speech.Synthesis;
 using System.Linq;
 
 namespace Speaking
@@ -14,11 +15,20 @@ namespace Speaking
 
         public Speech() {
             _speechSynthesizer = new SpeechSynthesizer();
+            _speechSynthesizer.SetOutputToDefaultAudioDevice();
             SetVoice();
         }
 
         public void Speak(string stringToSpeak) {
             _speechSynthesizer.Speak(stringToSpeak);
+        }
+
+        public void SpeakWithPromptBuilder() {
+            var builder = new PromptBuilder();
+            builder.AppendText("This is something of a test");
+            builder.AppendAudio(@"E:\OneDrive\Music\mycomp\MusicalIntervals01\ExtractedPianoNotes\F#5.wav");
+            _speechSynthesizer.Speak(builder);
+
         }
 
         private void SetVoice() {

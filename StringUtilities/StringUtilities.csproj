@@ -4,12 +4,12 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{51C78C27-A343-4249-9E49-85075275E524}</ProjectGuid>
+    <ProjectGuid>{A6EFC40E-18B6-4FB9-867A-273929AA2C19}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>NotesApp</RootNamespace>
-    <AssemblyName>NotesApp</AssemblyName>
-    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <RootNamespace>StringUtilities</RootNamespace>
+    <AssemblyName>StringUtilities</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -30,13 +30,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="NAudio, Version=1.7.3.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\NAudio.1.7.3\lib\net35\NAudio.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Speech" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -45,28 +40,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Interval.cs" />
-    <Compile Include="Intervals.cs" />
-    <Compile Include="IToneProvider.cs" />
-    <Compile Include="MusicalNote.cs" />
-    <Compile Include="MusicalNotes.cs" />
-    <Compile Include="NAudioSineWave.cs" />
-    <Compile Include="NoteDescription.cs" />
-    <Compile Include="NoteDescriptions.cs" />
-    <Compile Include="NumberUtilities.cs" />
-    <Compile Include="SineWaveProvider32.cs" />
-    <Compile Include="ToneProvider.cs" />
-    <Compile Include="NoteUtility.cs" />
+    <Compile Include="StringUtility.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\StringUtilities\StringUtilities.csproj">
-      <Project>{a6efc40e-18b6-4fb9-867a-273929aa2c19}</Project>
-      <Name>StringUtilities</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

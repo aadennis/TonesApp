@@ -18,8 +18,8 @@ namespace NotesApp {
 
         /// <summary>
         ///  Return a pair of random integers, where the first is always lower than
-        ///  the second, and there is not more than maxDistance 
-        ///  between the returned integers.   Keeping this interval close is because the main usecase is a musical interval test
+        ///  the second, and there is not more than maxDistance between the returned integers.   
+        ///  Keeping this interval close is because the main usecase is a musical interval test
         ///  where a large distance would not help with aural training.
         ///  It helps if the Random passed in has been used in previous calls, to help entropy.
         ///  Unison is not supported, as it is too easy to spot, unless there is a large time gap between the 2 notes.
@@ -29,7 +29,8 @@ namespace NotesApp {
         /// https://msdn.microsoft.com/en-us/library/2dx6wyd4(v=vs.110).aspx
         /// 
         /// </summary>
-        public static List<int> GetRandomInterval(int lowerLimit, int upperLimit, int maxDistance, Random rand, Direction directionRequested = 0) {
+        public static List<int> GetRandomInterval(int lowerLimit, int upperLimit, int maxDistance, 
+                Random rand, Direction directionRequested = 0) {
             var direction = directionRequested.Equals(Direction.Random) ? GetRandomDirection() : (int)directionRequested;
             if (rand == null) {
                 throw new ArgumentNullException(nameof(rand));
@@ -66,11 +67,14 @@ namespace NotesApp {
             return sortedInterval[1] >= sortedInterval[0] ? Direction.Ascending : Direction.Descending;
         }
 
+        /// <summary>
+        /// Stringify the direction enumeration (ascending or descending). We do not actually
+        /// speak the ascending token, as that is the default.
+        /// </summary>
+        /// <param name="direction"></param>
+        /// <returns></returns>
         public static string GetSpokenDirection(Direction direction) {
-            if (direction == Direction.Descending) {
-                return Direction.Descending.ToString();
-            }
-            return string.Empty;
+            return direction == Direction.Descending ? Direction.Descending.ToString() : string.Empty;
         }
 
         private static int GetRandomDirection() {

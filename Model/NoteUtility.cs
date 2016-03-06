@@ -14,8 +14,6 @@ namespace NotesApp {
     /// </summary>
     public class NoteUtility {
 
-
-
         private const int Duration = 1000;
         private const string StandardVoice = "Microsoft Hazel Desktop";
 

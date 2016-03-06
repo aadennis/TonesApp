@@ -42,6 +42,21 @@ namespace Model.Test {
         }
 
         [TestMethod]
+        public void ValidSemitoneCountReturnsExpectedIntervalDescriptionForAudio() {
+            var interval = 5;
+            var description = Intervals.GetInterval(interval, true);
+            Assert.AreEqual(@"c:\temp\PerfectFourth.wav", description);
+
+            interval = 0;
+            description = Intervals.GetInterval(interval);
+            Assert.AreEqual("Unison", description);
+
+            interval = -1;
+            description = Intervals.GetInterval(interval);
+            Assert.AreEqual("Minor second", description);
+        }
+
+        [TestMethod]
         public void CountOfAllIntervalsIsCorrect() {
             Assert.AreEqual(13, Intervals.GetAllIntervals().Count);
         }
