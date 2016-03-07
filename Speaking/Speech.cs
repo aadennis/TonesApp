@@ -8,7 +8,7 @@ namespace Speaking
     /// Wrapper to the Microsoft SpeechSynthesizer class, restricted to methods etc
     /// of interest in my apps.
     /// </summary>
-    public class Speech  {
+    public class Speech : TempSpeech  {
         private readonly SpeechSynthesizer _speechSynthesizer;
         //private const string PreferredVoice = "IVONA 2 Brian OEM";
         private const string PreferredVoice = "Microsoft Hazel Desktop";
@@ -19,7 +19,7 @@ namespace Speaking
             SetVoice();
         }
 
-        public void Speak(string stringToSpeak) {
+        public override void Speak(string stringToSpeak) {
             _speechSynthesizer.Speak(stringToSpeak);
         }
 

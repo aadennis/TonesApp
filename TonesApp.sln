@@ -35,7 +35,79 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "StringUtilities.Test", "Str
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StringUtilities.Test", "StringUtilities.Test\StringUtilities.Test.csproj", "{F7734F5F-B8EE-4692-A997-811F355DBDAF}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WavFiles", "WavFiles", "{49C85376-5095-4493-8D63-F2F71D0FD765}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PlayedAudioNotes.Piano", "PlayedAudioNotes.Piano", "{EB27A1A6-3D9E-442B-9ACF-7A221697C944}"
+	ProjectSection(SolutionItems) = preProject
+		Presentation.Speech\PlayedAudioNotesPiano\A#3.wav = Presentation.Speech\PlayedAudioNotesPiano\A#3.wav
+		Presentation.Speech\PlayedAudioNotesPiano\A#4.wav = Presentation.Speech\PlayedAudioNotesPiano\A#4.wav
+		Presentation.Speech\PlayedAudioNotesPiano\A#5.wav = Presentation.Speech\PlayedAudioNotesPiano\A#5.wav
+		Presentation.Speech\PlayedAudioNotesPiano\A3.wav = Presentation.Speech\PlayedAudioNotesPiano\A3.wav
+		Presentation.Speech\PlayedAudioNotesPiano\A4.wav = Presentation.Speech\PlayedAudioNotesPiano\A4.wav
+		Presentation.Speech\PlayedAudioNotesPiano\A5.wav = Presentation.Speech\PlayedAudioNotesPiano\A5.wav
+		Presentation.Speech\PlayedAudioNotesPiano\B3.wav = Presentation.Speech\PlayedAudioNotesPiano\B3.wav
+		Presentation.Speech\PlayedAudioNotesPiano\B4.wav = Presentation.Speech\PlayedAudioNotesPiano\B4.wav
+		Presentation.Speech\PlayedAudioNotesPiano\B5.wav = Presentation.Speech\PlayedAudioNotesPiano\B5.wav
+		Presentation.Speech\PlayedAudioNotesPiano\C#3.wav = Presentation.Speech\PlayedAudioNotesPiano\C#3.wav
+		Presentation.Speech\PlayedAudioNotesPiano\C#4.wav = Presentation.Speech\PlayedAudioNotesPiano\C#4.wav
+		Presentation.Speech\PlayedAudioNotesPiano\C#5.wav = Presentation.Speech\PlayedAudioNotesPiano\C#5.wav
+		Presentation.Speech\PlayedAudioNotesPiano\C#6.wav = Presentation.Speech\PlayedAudioNotesPiano\C#6.wav
+		Presentation.Speech\PlayedAudioNotesPiano\C3.wav = Presentation.Speech\PlayedAudioNotesPiano\C3.wav
+		Presentation.Speech\PlayedAudioNotesPiano\C4.wav = Presentation.Speech\PlayedAudioNotesPiano\C4.wav
+		Presentation.Speech\PlayedAudioNotesPiano\C5.wav = Presentation.Speech\PlayedAudioNotesPiano\C5.wav
+		Presentation.Speech\PlayedAudioNotesPiano\C6.wav = Presentation.Speech\PlayedAudioNotesPiano\C6.wav
+		Presentation.Speech\PlayedAudioNotesPiano\D#3.wav = Presentation.Speech\PlayedAudioNotesPiano\D#3.wav
+		Presentation.Speech\PlayedAudioNotesPiano\D#4.wav = Presentation.Speech\PlayedAudioNotesPiano\D#4.wav
+		Presentation.Speech\PlayedAudioNotesPiano\D#5.wav = Presentation.Speech\PlayedAudioNotesPiano\D#5.wav
+		Presentation.Speech\PlayedAudioNotesPiano\D#6.wav = Presentation.Speech\PlayedAudioNotesPiano\D#6.wav
+		Presentation.Speech\PlayedAudioNotesPiano\D3.wav = Presentation.Speech\PlayedAudioNotesPiano\D3.wav
+		Presentation.Speech\PlayedAudioNotesPiano\D4.wav = Presentation.Speech\PlayedAudioNotesPiano\D4.wav
+		Presentation.Speech\PlayedAudioNotesPiano\D5.wav = Presentation.Speech\PlayedAudioNotesPiano\D5.wav
+		Presentation.Speech\PlayedAudioNotesPiano\D6.wav = Presentation.Speech\PlayedAudioNotesPiano\D6.wav
+		Presentation.Speech\PlayedAudioNotesPiano\E3.wav = Presentation.Speech\PlayedAudioNotesPiano\E3.wav
+		Presentation.Speech\PlayedAudioNotesPiano\E4.wav = Presentation.Speech\PlayedAudioNotesPiano\E4.wav
+		Presentation.Speech\PlayedAudioNotesPiano\E5.wav = Presentation.Speech\PlayedAudioNotesPiano\E5.wav
+		Presentation.Speech\PlayedAudioNotesPiano\E6.wav = Presentation.Speech\PlayedAudioNotesPiano\E6.wav
+		Presentation.Speech\PlayedAudioNotesPiano\F#3.wav = Presentation.Speech\PlayedAudioNotesPiano\F#3.wav
+		Presentation.Speech\PlayedAudioNotesPiano\F#4.wav = Presentation.Speech\PlayedAudioNotesPiano\F#4.wav
+		Presentation.Speech\PlayedAudioNotesPiano\F#5.wav = Presentation.Speech\PlayedAudioNotesPiano\F#5.wav
+		Presentation.Speech\PlayedAudioNotesPiano\F3.wav = Presentation.Speech\PlayedAudioNotesPiano\F3.wav
+		Presentation.Speech\PlayedAudioNotesPiano\F4.wav = Presentation.Speech\PlayedAudioNotesPiano\F4.wav
+		Presentation.Speech\PlayedAudioNotesPiano\F5.wav = Presentation.Speech\PlayedAudioNotesPiano\F5.wav
+		Presentation.Speech\PlayedAudioNotesPiano\G#3.wav = Presentation.Speech\PlayedAudioNotesPiano\G#3.wav
+		Presentation.Speech\PlayedAudioNotesPiano\G#4.wav = Presentation.Speech\PlayedAudioNotesPiano\G#4.wav
+		Presentation.Speech\PlayedAudioNotesPiano\G#5.wav = Presentation.Speech\PlayedAudioNotesPiano\G#5.wav
+		Presentation.Speech\PlayedAudioNotesPiano\G3.wav = Presentation.Speech\PlayedAudioNotesPiano\G3.wav
+		Presentation.Speech\PlayedAudioNotesPiano\G4.wav = Presentation.Speech\PlayedAudioNotesPiano\G4.wav
+		Presentation.Speech\PlayedAudioNotesPiano\G5.wav = Presentation.Speech\PlayedAudioNotesPiano\G5.wav
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SpokenIntervals.Audio", "SpokenIntervals.Audio", "{AAF4CDE6-6B6C-40AF-B272-41CE63BF21C9}"
+	ProjectSection(SolutionItems) = preProject
+		Presentation.Speech\PlayedAudioNotesPiano\AugmentedFourth.wav = Presentation.Speech\PlayedAudioNotesPiano\AugmentedFourth.wav
+		Presentation.Speech\PlayedAudioNotesPiano\AugmentedFourth2.wav = Presentation.Speech\PlayedAudioNotesPiano\AugmentedFourth2.wav
+		Presentation.Speech\PlayedAudioNotesPiano\Descending.wav = Presentation.Speech\PlayedAudioNotesPiano\Descending.wav
+		Presentation.Speech\PlayedAudioNotesPiano\MajorSecond.wav = Presentation.Speech\PlayedAudioNotesPiano\MajorSecond.wav
+		Presentation.Speech\PlayedAudioNotesPiano\MajorSecond2.wav = Presentation.Speech\PlayedAudioNotesPiano\MajorSecond2.wav
+		Presentation.Speech\PlayedAudioNotesPiano\MajorSeventh.wav = Presentation.Speech\PlayedAudioNotesPiano\MajorSeventh.wav
+		Presentation.Speech\PlayedAudioNotesPiano\MajorSeventh2.wav = Presentation.Speech\PlayedAudioNotesPiano\MajorSeventh2.wav
+		Presentation.Speech\PlayedAudioNotesPiano\MajorSixth.wav = Presentation.Speech\PlayedAudioNotesPiano\MajorSixth.wav
+		Presentation.Speech\PlayedAudioNotesPiano\MajorSixth2.wav = Presentation.Speech\PlayedAudioNotesPiano\MajorSixth2.wav
+		Presentation.Speech\PlayedAudioNotesPiano\MajorThird.wav = Presentation.Speech\PlayedAudioNotesPiano\MajorThird.wav
+		Presentation.Speech\PlayedAudioNotesPiano\MajorThird2.wav = Presentation.Speech\PlayedAudioNotesPiano\MajorThird2.wav
+		Presentation.Speech\PlayedAudioNotesPiano\MinorSecond.wav = Presentation.Speech\PlayedAudioNotesPiano\MinorSecond.wav
+		Presentation.Speech\PlayedAudioNotesPiano\MinorSecond2.wav = Presentation.Speech\PlayedAudioNotesPiano\MinorSecond2.wav
+		Presentation.Speech\PlayedAudioNotesPiano\MinorSeventh.wav = Presentation.Speech\PlayedAudioNotesPiano\MinorSeventh.wav
+		Presentation.Speech\PlayedAudioNotesPiano\MinorSeventh2.wav = Presentation.Speech\PlayedAudioNotesPiano\MinorSeventh2.wav
+		Presentation.Speech\PlayedAudioNotesPiano\MinorSixth.wav = Presentation.Speech\PlayedAudioNotesPiano\MinorSixth.wav
+		Presentation.Speech\PlayedAudioNotesPiano\MinorSixth2.wav = Presentation.Speech\PlayedAudioNotesPiano\MinorSixth2.wav
+		Presentation.Speech\PlayedAudioNotesPiano\MinorThird.wav = Presentation.Speech\PlayedAudioNotesPiano\MinorThird.wav
+		Presentation.Speech\PlayedAudioNotesPiano\MinorThrid.wav = Presentation.Speech\PlayedAudioNotesPiano\MinorThrid.wav
+		Presentation.Speech\PlayedAudioNotesPiano\Octave.wav = Presentation.Speech\PlayedAudioNotesPiano\Octave.wav
+		Presentation.Speech\PlayedAudioNotesPiano\Octave2.wav = Presentation.Speech\PlayedAudioNotesPiano\Octave2.wav
+		Presentation.Speech\PlayedAudioNotesPiano\PerfectFifth.wav = Presentation.Speech\PlayedAudioNotesPiano\PerfectFifth.wav
+		Presentation.Speech\PlayedAudioNotesPiano\PerfectFifth2.wav = Presentation.Speech\PlayedAudioNotesPiano\PerfectFifth2.wav
+		Presentation.Speech\PlayedAudioNotesPiano\PerfectFourth.wav = Presentation.Speech\PlayedAudioNotesPiano\PerfectFourth.wav
+		Presentation.Speech\PlayedAudioNotesPiano\PerfectFourth2.wav = Presentation.Speech\PlayedAudioNotesPiano\PerfectFourth2.wav
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -213,6 +285,7 @@ Global
 		{22BF5BD8-FB78-4B27-8D0D-6D5FA0FBBF2B} = {CCF9C88B-41AB-4377-906A-AB195C96304D}
 		{A6EFC40E-18B6-4FB9-867A-273929AA2C19} = {2AECCCC7-A6CF-43AD-8837-F9CDD8FAF29C}
 		{F7734F5F-B8EE-4692-A997-811F355DBDAF} = {7F6624FC-8AF8-4E35-A176-826C984A2A57}
-		{49C85376-5095-4493-8D63-F2F71D0FD765} = {FC22A2DE-CD20-4F1B-AF72-941C5D0AEC23}
+		{EB27A1A6-3D9E-442B-9ACF-7A221697C944} = {FC22A2DE-CD20-4F1B-AF72-941C5D0AEC23}
+		{AAF4CDE6-6B6C-40AF-B272-41CE63BF21C9} = {FC22A2DE-CD20-4F1B-AF72-941C5D0AEC23}
 	EndGlobalSection
 EndGlobal

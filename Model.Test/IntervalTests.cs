@@ -48,12 +48,12 @@ namespace Model.Test {
             Assert.AreEqual(@"c:\temp\PerfectFourth.wav", description);
 
             interval = 0;
-            description = Intervals.GetInterval(interval);
-            Assert.AreEqual("Unison", description);
+            description = Intervals.GetInterval(interval, true);
+            Assert.AreEqual(@"c:\temp\Unison.wav", description);
 
             interval = -1;
-            description = Intervals.GetInterval(interval);
-            Assert.AreEqual("Minor second", description);
+            description = Intervals.GetInterval(interval, true);
+            Assert.AreEqual(@"c:\temp\MinorSecond.wav", description);
         }
 
         [TestMethod]
