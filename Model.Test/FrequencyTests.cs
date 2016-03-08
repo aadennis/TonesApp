@@ -10,6 +10,8 @@ namespace Model.Test {
 
         private const int TestFrequency = 147;
         private const int KnownIndexForFrequency = 2;
+        private const int KnownSequenceForFrequency = 3;
+
         private readonly IToneProvider _toneProvider = new ToneProvider(1.0f);
 
         [TestMethod]
@@ -34,6 +36,29 @@ namespace Model.Test {
             var frequency = notes.GetNoteFromIndex(KnownIndexForFrequency).Frequency;
             Assert.AreEqual(TestFrequency, frequency);
 
+        }
+
+        [TestMethod]
+        public void FrequencyCanBeGotViaSequence() {
+            TraceExecutingMethod();
+            var notes = new MusicalNotes();
+            var frequency = notes.GetNoteFromSequence(KnownSequenceForFrequency).Frequency;
+            Assert.AreEqual(TestFrequency, frequency);
+
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(KeyNotFoundException))]
+        public void GettingFrequencyViaNonValidSequenceThrowsException() {
+            TraceExecutingMethod();
+            var notes = new MusicalNotes();
+            try {
+                var dummy = notes.GetNoteFromSequence(999).Frequency;
+            }
+            catch (KeyNotFoundException e) {
+                Assert.AreEqual("No MusicalNote found with a sequence of [999]", e.Message);
+                throw;
+            }
         }
 
         [TestMethod]
