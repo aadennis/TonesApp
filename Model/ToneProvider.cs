@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Media;
+using System.Speech.Synthesis;
+using StringUtilities;
 
 namespace NotesApp {
 
@@ -18,6 +20,9 @@ namespace NotesApp {
         private static readonly List<int> WaveHeaderFileHeader =
              new List<int> { 0X46464952, 36 + Bytes, 0X45564157, 0X20746D66, 16, 0X20001, 44100, 176400, 0X100004, 0X61746164, Bytes };
 
+        private static string GetAudioFolder() {
+            return @"c:\temp";
+        }
 
         public ToneProvider(float amplitude) {
             _amplitude = amplitude*32767;
@@ -25,6 +30,13 @@ namespace NotesApp {
 
         public void PlayTone(int frequency, double duration) {
             PlaySineWave(frequency, duration * 1000);
+        }
+
+        public void PlayAudio(string noteName) {
+            var p = new PromptBuilder();
+            p.AppendAudio(noteName);
+            var synth = new SpeechSynthesizer();
+            synth.Speak(p);
         }
 
         /// <summary>

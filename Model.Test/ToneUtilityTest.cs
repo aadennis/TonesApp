@@ -80,6 +80,35 @@ namespace Model.Test {
             }
         }
 
+        [TestMethod]
+        [TestCategory("SoundTestVeryLongDuration")]
+        public void PlayIntervalsAsSineAndConfirmTheirNameAsAudio() {
+
+            const int totalIterations = 300;
+            const int sectionCount = 6;
+            const int iterationsPerSection = totalIterations / sectionCount;
+            const int secondsToSleep = 5;
+            var notes = new MusicalNotes();
+            var setOfTones = new NoteUtility(_toneProvider);
+            var upperLimit = notes.GetAllNotes().Count - 1;
+
+            for (var i = 0; i < totalIterations; i++) {
+                // do a break so that the listener has time to consolidate a bit
+                if (i == 0) {
+                    _synth.Speak("This is; Musical Intervals: Section 1");
+
+                }
+                else
+                if (i % iterationsPerSection == 0) {
+                    _synth.Speak($"This is; Musical Intervals: Section {i / iterationsPerSection + 1}");
+                }
+                //we want substantially more ascending than descending intervals - this spread gives about 80%:
+                var currentDirectionType = i % 3 == 0 ? NumberUtilities.Direction.Random : NumberUtilities.Direction.Ascending;
+                var interval = NumberUtilities.GetRandomInterval(0, upperLimit, 12, _random, currentDirectionType);
+                setOfTones.PlayIntervalWithCommentary(interval, secondsToSleep, true);
+            }
+        }
+
 
         [TestMethod]
         [TestCategory("SoundTest")]

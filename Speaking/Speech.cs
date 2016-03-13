@@ -27,6 +27,12 @@ namespace Speaking
             var builder = new PromptBuilder();
             builder.AppendText("This is something of a test");
             builder.AppendAudio(@"E:\OneDrive\Music\mycomp\MusicalIntervals01\ExtractedPianoNotes\F#5.wav");
+            builder.AppendAudio(@"E:\OneDrive\Music\mycomp\MusicalIntervals01\ExtractedPianoNotes\E5.wav");
+
+            builder.AppendAudio(@"E:\OneDrive\Music\mycomp\MusicalIntervals01\ExtractedPianoNotes\PerfectFourth2.wav" );
+            builder.AppendAudio(@"E:\OneDrive\Music\mycomp\MusicalIntervals01\ExtractedPianoNotes\PerfectFourth3.wav");
+
+
             _speechSynthesizer.Speak(builder);
 
         }

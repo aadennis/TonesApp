@@ -5,6 +5,7 @@ using System.Linq;
 using System.Media;
 using System.Speech.Synthesis;
 using System.Threading;
+using StringUtilities;
 
 namespace NotesApp {
 
@@ -51,24 +52,49 @@ namespace NotesApp {
         }
 
         public void PlayNote(MusicalNote note) {
-            Console.WriteLine("[{0}][{1}]", note.Frequency, note.Note);
             _toneProvider.PlayTone(note.Frequency, 1);
         }
 
-        public void PlayIntervalWithCommentary(List<int> interval, int delayInSeconds) {
-            PlayAndDelay(interval, delayInSeconds);
-            PlayAndDelay(interval, delayInSeconds);
+        public void PlayNoteAsAudio(MusicalNote note) {
+            var tmp = note.Note + note.Octave;
+            var x = StringUtilities.StringUtility.PascalCaseWithSuffix(@"c:\temp", tmp);
+            _toneProvider.PlayAudio(x);
+        }
+
+        public void PlayIntervalWithCommentary(List<int> interval, int delayInSeconds, bool isAudio = false) {
+            PlayAndDelay(interval, delayInSeconds, isAudio);
+            PlayAndDelay(interval, delayInSeconds, isAudio);
 
             var semitoneCount = interval[1] - interval[0];
-            var spokenInterval = Intervals.GetInterval(semitoneCount);
+            var spokenInterval = Intervals.GetInterval(semitoneCount, isAudio);
+            var direction = NumberUtilities.GetSpokenDirection(NumberUtilities.GetDirection(interval));
 
-            _synth.Speak($"{spokenInterval}; {NumberUtilities.GetSpokenDirection(NumberUtilities.GetDirection(interval))}");
+            if (!isAudio) {
+                _synth.Speak(
+                    $"{spokenInterval}; {direction}");
+            }
+            else {
+                var builder = new PromptBuilder();
+                builder.AppendAudio(spokenInterval);
+                if (!string.IsNullOrEmpty(direction)) {
+                    var directionFile = StringUtility.PascalCaseWithSuffix(@"c:\temp", direction);
+                    builder.AppendAudio(directionFile);
+                }
+                _synth.Speak(builder);
+            }
             Thread.Sleep(delayInSeconds * 1000);
         }
 
-        private void PlayAndDelay(IReadOnlyList<int> interval, int delayInSeconds) {
-            PlayNote(_notes.GetNoteFromIndex(interval[0]));
-            PlayNote(_notes.GetNoteFromIndex(interval[1]));
+        private void PlayAndDelay(IReadOnlyList<int> interval, int delayInSeconds, bool isAudio = false) {
+            if (!isAudio) {
+                PlayNote(_notes.GetNoteFromIndex(interval[0]));
+                PlayNote(_notes.GetNoteFromIndex(interval[1]));
+
+            }
+            else {
+                PlayNoteAsAudio(_notes.GetNoteFromIndex(interval[0]));
+                PlayNoteAsAudio(_notes.GetNoteFromIndex(interval[1]));
+            }
             Thread.Sleep(delayInSeconds * 1000);
         }
 

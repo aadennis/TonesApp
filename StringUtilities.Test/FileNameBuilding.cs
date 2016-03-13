@@ -13,6 +13,10 @@ namespace StringUtilities.Test {
 
             phrase = StringUtility.PascalCaseWithSuffix(path, "Unison and her Friends minor and major");
             Assert.AreEqual(@"c:\temp\UnisonAndHerFriendsMinorAndMajor.wav", phrase);
+
+            phrase = StringUtility.PascalCaseWithSuffix(path, "F#3");
+            Assert.AreEqual(@"c:\temp\F#3.wav", phrase);
+
         }
     }
 }

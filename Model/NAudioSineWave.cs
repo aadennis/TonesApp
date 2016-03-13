@@ -1,4 +1,6 @@
-﻿using NAudio.Wave;
+﻿using System;
+using System.Speech.Synthesis;
+using NAudio.Wave;
 
 namespace NotesApp {
 
@@ -10,11 +12,7 @@ namespace NotesApp {
         private float _amplitude;
 
         public NAudioSineWave(float amplitude) {
-            _sineWave = new SineWaveProvider32();
-            _sineWave.Amplitude = (float)amplitude;
-
-
-
+            _sineWave = new SineWaveProvider32 {Amplitude = amplitude};
         }
 
         public void PlayTone(int frequency, double duration) {
@@ -31,5 +29,15 @@ namespace NotesApp {
             }
         }
 
+        public void PlayAudio(string noteName) {
+            throw new NotImplementedException();
+        }
+
+        void IToneProvider.PlayAudio(string noteName) {
+           var p = new PromptBuilder();
+            p.AppendAudio(noteName);
+            var s = new SpeechSynthesizer();
+            s.Speak(p);
+        }
     }
 }
