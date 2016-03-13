@@ -17,7 +17,6 @@ namespace SpeechAssets {
             _speech.Voice = voices.FirstOrDefault();
 
             SpeakTheText("this is a wild test");
-            var x = 22;
             
         }
 

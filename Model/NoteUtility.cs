@@ -75,7 +75,10 @@ namespace NotesApp {
             }
             else {
                 var builder = new PromptBuilder();
-                builder.AppendAudio(spokenInterval);
+                //builder.AppendAudio(spokenInterval);
+                builder.AppendAudio(@"c:\temp\ad3.wav");
+                builder.AppendAudio(@"c:\temp\minortest01.wav");
+
                 if (!string.IsNullOrEmpty(direction)) {
                     var directionFile = StringUtility.PascalCaseWithSuffix(@"c:\temp", direction);
                     builder.AppendAudio(directionFile);

@@ -7,9 +7,8 @@ namespace NotesApp {
     //http://mark-dot-net.blogspot.co.uk/2009/10/playback-of-sine-wave-in-naudio.html
     public class NAudioSineWave : IToneProvider {
 
-        private SineWaveProvider32 _sineWave;
+        private readonly SineWaveProvider32 _sineWave;
         private static WaveOut _waveOut;
-        private float _amplitude;
 
         public NAudioSineWave(float amplitude) {
             _sineWave = new SineWaveProvider32 {Amplitude = amplitude};
