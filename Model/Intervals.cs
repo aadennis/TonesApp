@@ -61,7 +61,7 @@ namespace NotesApp {
         /// distinguish one set of files from another</param>
         /// <returns>The description or audio location of the requested interval. 
         /// For example "Minor seventh" or "c:\temp\MinorSeventh.wav"</returns>
-        public static string GetInterval(int semiToneCount, bool isAudio = false, string audioFilePrefix = "") {
+        public static string GetInterval(int semiToneCount, bool isAudio = false, string audioFilePrefix = "", bool isDescending = false) {
             var absSemitoneCount = Math.Abs(semiToneCount);
             if (absSemitoneCount > 12) {
                 throw new ArgumentException($"Requested semi-tone count of [{semiToneCount}] is outside the allowed range");
@@ -73,7 +73,8 @@ namespace NotesApp {
                 return intervalAsWords;
             }
 
-            return StringUtilities.StringUtility.MakeFileName(GetAudioFolder(), intervalAsWords, "wav", audioFilePrefix);
+            return StringUtilities.StringUtility.MakeFileName(GetAudioFolder(), intervalAsWords, "wav", audioFilePrefix,
+                isDescending ? "Desc" : "");
         }
     }
 }

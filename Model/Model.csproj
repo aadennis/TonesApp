@@ -63,6 +63,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Speaking\Speaking.csproj">
+      <Project>{b8ae683d-edb7-4bbd-8303-b1335e608071}</Project>
+      <Name>Speaking</Name>
+    </ProjectReference>
     <ProjectReference Include="..\StringUtilities\StringUtilities.csproj">
       <Project>{a6efc40e-18b6-4fb9-867a-273929aa2c19}</Project>
       <Name>StringUtilities</Name>

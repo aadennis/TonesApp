@@ -6,6 +6,7 @@ using System.Media;
 using System.Speech.Synthesis;
 using System.Threading;
 using StringUtilities;
+using Speaking;
 
 namespace NotesApp {
 
@@ -55,33 +56,39 @@ namespace NotesApp {
             _toneProvider.PlayTone(note.Frequency, 1);
         }
 
-        public void PlayNoteAsAudio(MusicalNote note) {
+        /// <summary>
+        /// Locate and play the audio file matching the passed note.
+        /// This method is specifically for rendering notes, not their spoken representation
+        /// </summary>
+        /// <param name="note"></param>
+        public void PlayNoteAsAudio(MusicalNote note) { 
             var tmp = note.Note + note.Octave;
-            var x = StringUtilities.StringUtility.MakeFileName(@"c:\temp", tmp, "wav");
+            var x = StringUtility.MakeFileName(@"c:\temp", tmp, "wav");
 
             _toneProvider.PlayAudio(x);
         }
 
-        public void PlayIntervalWithCommentary(List<int> interval, int delayInSeconds, bool isAudio = false) {
+        public void PlayIntervalWithCommentary(List<int> interval, int delayInSeconds, string audioNotePrefix = "", bool isAudio = false) {
             PlayAndDelay(interval, delayInSeconds, isAudio);
             PlayAndDelay(interval, delayInSeconds, isAudio);
 
             var semitoneCount = interval[1] - interval[0];
-            var spokenInterval = Intervals.GetInterval(semitoneCount, isAudio);
             var direction = NumberUtilities.GetSpokenDirection(NumberUtilities.GetDirection(interval));
+            var spokenInterval = Intervals.GetInterval(semitoneCount, isAudio, audioNotePrefix);
+
 
             if (!isAudio) {
                 _synth.Speak(
                     $"{spokenInterval}; {direction}");
             }
             else {
+              
                 var builder = new PromptBuilder();
-                //builder.AppendAudio(spokenInterval);
-                builder.AppendAudio(@"c:\temp\ad3.wav");
-                builder.AppendAudio(@"c:\temp\minortest01.wav");
+
 
                 if (!string.IsNullOrEmpty(direction)) {
-                    var directionFile = StringUtility.MakeFileName(@"c:\temp", direction, "wav");
+
+                    var directionFile = StringUtility.MakeFileName(@"c:\temp", spokenInterval, "wav", audioNotePrefix, direction);
                     builder.AppendAudio(directionFile);
                 }
                 _synth.Speak(builder);
@@ -89,7 +96,7 @@ namespace NotesApp {
             Thread.Sleep(delayInSeconds * 1000);
         }
 
-        private void PlayAndDelay(IReadOnlyList<int> interval, int delayInSeconds, bool isAudio = false) {
+        private void PlayAndDelay(IReadOnlyList<int> interval, int delayInSeconds, bool isAudio = false ) {
             if (!isAudio) {
                 PlayNote(_notes.GetNoteFromIndex(interval[0]));
                 PlayNote(_notes.GetNoteFromIndex(interval[1]));
