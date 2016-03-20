@@ -54,6 +54,10 @@ namespace Model.Test {
             interval = -1;
             description = Intervals.GetInterval(interval, true);
             Assert.AreEqual(@"c:\temp\MinorSecond.wav", description);
+
+            interval = 5;
+            description = Intervals.GetInterval(interval, true, "TestPrefix");
+            Assert.AreEqual(@"c:\temp\TestPrefixPerfectFourth.wav", description);
         }
 
         [TestMethod]

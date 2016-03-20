@@ -12,7 +12,6 @@ namespace TestMahSpeech
         {
             var x2= new MahSpeech();
             Assert.AreEqual(1,2);
-            var rr = 12;
         }
     }
 }

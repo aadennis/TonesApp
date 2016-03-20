@@ -123,14 +123,34 @@ namespace Model.Test {
 
         [TestMethod]
         [TestCategory("SoundTest")]
-        public void SpeakAllTheIntervalsUsingStoredAudio() {
-            var intervals = Intervals.GetAllIntervals();
+        public void SpeakAllTheIntervalsUsingStoredAudioWithFilePrefix() {
+            var s = new Speech();
+            var intervals = Intervals.GetAudioIntervals("Emm");
             foreach (var interval in intervals) {
-                string wordsToSpeak = $"SemitoneCount: {interval.SemiToneCount};{interval.Description}";
-                Debug.WriteLine(wordsToSpeak);
-                _synth.Speak(wordsToSpeak);
+                s.SpeakAudio(interval);
             }
         }
+
+        [TestMethod]
+        [TestCategory("SoundTest")]
+        public void SpeakAllTheIntervalsUsingStoredAudioNoFilePrefix() {
+            var s = new Speech();
+            var intervals = Intervals.GetAudioIntervals();
+            foreach (var interval in intervals) {
+                s.SpeakAudio(interval);
+            }
+        }
+
+        [TestMethod]
+        [TestCategory("SoundTest")]
+        public void SpeakAnIntervalUsingStoredAudio() {
+            var s = new Speech();
+            var intervals = Intervals.GetAudioIntervals();
+            foreach (var interval in intervals) {
+                s.SpeakAudio(interval);
+            }
+        }
+
 
         [TestMethod]
         [TestCategory("SoundTest")]

@@ -57,7 +57,8 @@ namespace NotesApp {
 
         public void PlayNoteAsAudio(MusicalNote note) {
             var tmp = note.Note + note.Octave;
-            var x = StringUtilities.StringUtility.PascalCaseWithSuffix(@"c:\temp", tmp);
+            var x = StringUtilities.StringUtility.MakeFileName(@"c:\temp", tmp, "wav");
+
             _toneProvider.PlayAudio(x);
         }
 
@@ -80,7 +81,7 @@ namespace NotesApp {
                 builder.AppendAudio(@"c:\temp\minortest01.wav");
 
                 if (!string.IsNullOrEmpty(direction)) {
-                    var directionFile = StringUtility.PascalCaseWithSuffix(@"c:\temp", direction);
+                    var directionFile = StringUtility.MakeFileName(@"c:\temp", direction, "wav");
                     builder.AppendAudio(directionFile);
                 }
                 _synth.Speak(builder);

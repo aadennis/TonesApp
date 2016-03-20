@@ -37,6 +37,12 @@ namespace Speaking
 
         }
 
+        public void SpeakAudio(string fileLocation) {
+            var builder = new PromptBuilder();
+            builder.AppendAudio(fileLocation);
+            _speechSynthesizer.Speak(builder);
+        }
+
         private void SetVoice() {
             var availableVoices = _speechSynthesizer.GetInstalledVoices();
             var voice = availableVoices.SingleOrDefault(x => x.VoiceInfo.Name.Equals(PreferredVoice));

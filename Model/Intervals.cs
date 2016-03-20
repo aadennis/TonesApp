@@ -34,7 +34,16 @@ namespace NotesApp {
         }
 
         /// <summary>
-        /// Gets the collection of all intervals
+        /// Gets the collection of all intervals, expressed as the location of a set of wav files.
+        /// See GetInterval for comments ref filePrefix
+        /// </summary>
+        /// <returns>the set of intervals</returns>
+        public static List<string> GetAudioIntervals(string filePrefix = "") {
+            return IntervalSet.Select(x => GetInterval(x.SemiToneCount, true, filePrefix)).ToList();
+        }
+
+        /// <summary>
+        /// Gets the collection of all intervals, expressed as words
         /// </summary>
         /// <returns>the set of intervals</returns>
         public static List<Interval> GetAllIntervals() {
@@ -48,18 +57,23 @@ namespace NotesApp {
         /// <param name="semiToneCount"></param>
         /// <param name="isAudio">If this is true, then the returned string is the location of the audio file,
         /// e.g. "{wav folder}/MinorSeventh.wav" </param>
-        /// <returns>The description or audio location of the requested interval. For example "Minor seventh".</returns>
-        public static string GetInterval(int semiToneCount, bool isAudio = false) {
+        /// <param name="audioFilePrefix">optional prefix for a filename. In practice, this is to
+        /// distinguish one set of files from another</param>
+        /// <returns>The description or audio location of the requested interval. 
+        /// For example "Minor seventh" or "c:\temp\MinorSeventh.wav"</returns>
+        public static string GetInterval(int semiToneCount, bool isAudio = false, string audioFilePrefix = "") {
             var absSemitoneCount = Math.Abs(semiToneCount);
             if (absSemitoneCount > 12) {
                 throw new ArgumentException($"Requested semi-tone count of [{semiToneCount}] is outside the allowed range");
             }
-            var xxx = IntervalSet.Single(interval => interval.SemiToneCount.Equals(absSemitoneCount)).Description;
+            var intervalAsWords = IntervalSet.Single(interval => 
+                    interval.SemiToneCount.Equals(absSemitoneCount)).Description;
             if (!isAudio)
             {
-                return xxx;
+                return intervalAsWords;
             }
-            return StringUtilities.StringUtility.PascalCaseWithSuffix(GetAudioFolder(), xxx);
+
+            return StringUtilities.StringUtility.MakeFileName(GetAudioFolder(), intervalAsWords, "wav", audioFilePrefix);
         }
     }
 }
