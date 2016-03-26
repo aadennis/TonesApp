@@ -59,6 +59,7 @@ namespace NotesApp {
         /// e.g. "{wav folder}/MinorSeventh.wav" </param>
         /// <param name="audioFilePrefix">optional prefix for a filename. In practice, this is to
         /// distinguish one set of files from another</param>
+        /// <param name="isDescending"></param>
         /// <returns>The description or audio location of the requested interval. 
         /// For example "Minor seventh" or "c:\temp\MinorSeventh.wav"</returns>
         public static string GetInterval(int semiToneCount, bool isAudio = false, string audioFilePrefix = "", bool isDescending = false) {

@@ -77,6 +77,10 @@ namespace NotesApp {
             return direction == Direction.Descending ? Direction.Descending.ToString() : string.Empty;
         }
 
+        public static bool IsDescending(List<int> sortedInterval) {
+            return sortedInterval[0] > sortedInterval[1];
+        }
+
         private static int GetRandomDirection() {
             return RandomDirection.Next(0, 2);
         }

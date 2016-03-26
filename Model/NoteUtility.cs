@@ -68,29 +68,31 @@ namespace NotesApp {
             _toneProvider.PlayAudio(x);
         }
 
+        /// <summary>
+        /// Play the musical interval a number of times (todo: improve that), followed by the description,
+        /// e.g. "Minor second descending". 
+        /// The call to GetInterval does most of the hard work.
+        /// </summary>
+        /// <param name="interval"></param>
+        /// <param name="delayInSeconds"></param>
+        /// <param name="audioNotePrefix"></param>
+        /// <param name="isAudio">true if the commentary is sourced from a wav file</param>
         public void PlayIntervalWithCommentary(List<int> interval, int delayInSeconds, string audioNotePrefix = "", bool isAudio = false) {
             PlayAndDelay(interval, delayInSeconds, isAudio);
             PlayAndDelay(interval, delayInSeconds, isAudio);
 
             var semitoneCount = interval[1] - interval[0];
             var direction = NumberUtilities.GetSpokenDirection(NumberUtilities.GetDirection(interval));
-            var spokenInterval = Intervals.GetInterval(semitoneCount, isAudio, audioNotePrefix);
-
+            var isDescending = NumberUtilities.IsDescending(interval);
+            var spokenInterval = Intervals.GetInterval(semitoneCount, isAudio, audioNotePrefix, isDescending);
 
             if (!isAudio) {
                 _synth.Speak(
                     $"{spokenInterval}; {direction}");
             }
-            else {
-              
+            else { //audio...
                 var builder = new PromptBuilder();
-
-
-                if (!string.IsNullOrEmpty(direction)) {
-
-                    var directionFile = StringUtility.MakeFileName(@"c:\temp", spokenInterval, "wav", audioNotePrefix, direction);
-                    builder.AppendAudio(directionFile);
-                }
+                builder.AppendAudio(spokenInterval);
                 _synth.Speak(builder);
             }
             Thread.Sleep(delayInSeconds * 1000);

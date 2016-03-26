@@ -61,6 +61,13 @@ namespace Model.Test {
         }
 
         [TestMethod]
+        public void ValidDescendingSemitoneCountReturnsExpectedIntervalDescriptionForAudio() {
+            var interval = 5;
+            var description = Intervals.GetInterval(interval, true, "TestPrefix", true);
+            Assert.AreEqual(@"c:\temp\TestPrefixPerfectFourthDesc.wav", description);
+        }
+
+        [TestMethod]
         public void CountOfAllIntervalsIsCorrect() {
             Assert.AreEqual(13, Intervals.GetAllIntervals().Count);
         }
